@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#CED1D2</color>
+    <color name="colorPrimaryDark">#00574B</color>
+    <color name="colorAccent">#D81B60</color>
+    <color name="activity_title_color">#444242</color>
+    <color name="dimgray">#808080</color>
+    <color name="home_reminder_background">#F1F4F7</color>
+    <color name="home_bottom_btn">#98CAFC</color>
+    <color name="home_bottom_btn_border_line">#545454</color>
+    <color name="transparentColor">#00E5E5E5</color>
+    <color name="customBoderLine">#545454</color>
+    <color name="viewDataCellBorder">#2a2a2a</color>
+    <color name="bugetDepositTxt">#00a000</color>
+    <color name="budgetWithdrawTxt">#FF0000</color>
+</resources>
