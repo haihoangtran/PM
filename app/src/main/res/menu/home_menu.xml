@@ -10,4 +10,7 @@
     <item
         android:id="@+id/home_menu_import_btn"
         android:title="@string/import_text" />
+    <item
+        android:id="@+id/home_menu_share_btn"
+        android:title="@string/share_text" />
 </menu>

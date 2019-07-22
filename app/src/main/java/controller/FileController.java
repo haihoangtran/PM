@@ -67,6 +67,11 @@ public class FileController {
         }
     }
 
+    public File getDBFile(){
+
+        return new File (Environment.getDataDirectory(), appDBPath + constant.DATABASE_NAME);
+    }
+
     /*  *******************************************************
                         PRIVATE FUNCTIONS
      ******************************************************* */

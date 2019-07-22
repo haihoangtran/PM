@@ -43,4 +43,6 @@
     <string name="default_amount_label">Default($):</string>
     <string name="export">Export</string>
     <string name="import_text">Import</string>
+    <string name="share_text">Share</string>
+    <string name="share_using_title">Share using: </string>
 </resources>

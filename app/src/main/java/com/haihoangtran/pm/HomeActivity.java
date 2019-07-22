@@ -1,14 +1,14 @@
 package com.haihoangtran.pm;
 
-import android.graphics.LinearGradient;
 import android.graphics.drawable.ColorDrawable;
+import android.net.Uri;
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.core.content.FileProvider;
 import androidx.fragment.app.DialogFragment;
-
 import android.Manifest;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -26,9 +26,10 @@ import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.series.DataPoint;
 import com.jjoe64.graphview.series.LineGraphSeries;
 import com.google.android.material.tabs.TabLayout;
+
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.List;
@@ -124,6 +125,9 @@ public class HomeActivity extends AppCompatActivity implements UserDialog.OnInpu
                 }catch (FileNotFoundException e){
                     e.printStackTrace();
                 }
+                break;
+            case R.id.home_menu_share_btn:
+                this.shareBtnHandle();
                 break;
         }
         return true;
@@ -291,5 +295,21 @@ public class HomeActivity extends AppCompatActivity implements UserDialog.OnInpu
             }
         });
     }
+
+    // --------------           MENU BUTTONS        --------------
+    private void shareBtnHandle(){
+        // Need 2 updates in 2 files for sharing with File Provider: Manifest, resource/cml/provider_paths.xml
+        File dbFile = this.fileController.getDBFile();
+        Uri path = FileProvider.getUriForFile(this, "com.haihoangtran.pm", dbFile);
+
+        Intent shareIntent = new Intent();
+        shareIntent.setAction(Intent.ACTION_SEND);
+        shareIntent.putExtra(Intent.EXTRA_TEXT, "It is db file");
+        shareIntent.putExtra(Intent.EXTRA_STREAM, path);
+        shareIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+        shareIntent.setType("application/octet-stream");
+        startActivity(Intent.createChooser(shareIntent, getString(R.string.share_using_title)));
+    }
+
 
 }
