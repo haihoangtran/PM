@@ -274,7 +274,7 @@ public class HomeActivity extends AppCompatActivity implements UserDialog.OnInpu
     // --------------           BOTTOM BUTTONS        --------------
     //Handle onClick Budget  button
     private void budgetBtnHandle(){
-        Button budgetBtn = findViewById(R.id.budget_btn);
+        LinearLayout budgetBtn = findViewById(R.id.budget_btn);
         budgetBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -286,7 +286,7 @@ public class HomeActivity extends AppCompatActivity implements UserDialog.OnInpu
 
     // Handle onClick payment button
     private void paymentBtnHandle(){
-        Button paymentBtn =findViewById(R.id.payment_btn);
+        LinearLayout paymentBtn =findViewById(R.id.payment_btn);
         paymentBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
