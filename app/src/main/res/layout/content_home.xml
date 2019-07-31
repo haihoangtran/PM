@@ -74,8 +74,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="2"
-                        app:tabIndicatorColor="@android:color/background_light"
-                        app:tabSelectedTextColor="@android:color/holo_blue_bright"
+                        app:tabIndicatorColor="@color/transparentColor"
+                        app:tabSelectedTextColor="@android:color/holo_orange_dark"
                         app:tabTextAppearance="@style/TextAppearance.AppCompat.Small">
 
                         <com.google.android.material.tabs.TabItem
@@ -158,9 +158,9 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
-                            android:fontFamily="sans-serif-medium"
+                            android:fontFamily="sans-serif-black"
                             android:text="@string/payment_button"
-                            android:textSize="13sp"
+                            android:textSize="15sp"
                             android:textStyle="bold" />
                     </LinearLayout>
 
@@ -194,10 +194,10 @@
                             android:id="@+id/budget_btn_text"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:fontFamily="sans-serif-medium"
+                            android:fontFamily="sans-serif-black"
                             android:gravity="center"
                             android:text="@string/budget_button"
-                            android:textSize="13sp"
+                            android:textSize="15sp"
                             android:textStyle="bold" />
                     </LinearLayout>
 

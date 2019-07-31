@@ -28,16 +28,16 @@
             <Button
                 android:id="@+id/pay_btn"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="15"
+                android:layout_height="match_parent"
+                android:layout_weight="14"
                 android:background="@drawable/ic_pay" />
 
             <Button
                 android:id="@+id/payment_add_nav_btn"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="15"
-                android:background="@android:drawable/ic_input_add" />
+                android:layout_height="match_parent"
+                android:layout_weight="14"
+                android:background="@drawable/ic_add" />
         </LinearLayout>
 
     </com.google.android.material.appbar.AppBarLayout>

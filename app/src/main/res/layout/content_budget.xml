@@ -64,7 +64,7 @@
                 android:id="@+id/budget_tab"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:tabIndicatorColor="@android:color/background_light"
+                app:tabIndicatorColor="@color/colorPrimary"
                 app:tabSelectedTextColor="@android:color/holo_blue_bright">
 
                 <com.google.android.material.tabs.TabItem
