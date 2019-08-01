@@ -14,6 +14,8 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
 import android.widget.Button;
 import android.content.Intent;
 import android.widget.LinearLayout;
@@ -174,7 +176,10 @@ public class HomeActivity extends AppCompatActivity implements UserDialog.OnInpu
         TextView name = findViewById(R.id.user_name);
         TextView balance = findViewById(R.id.user_balance);
         TextView expense = findViewById(R.id.user_expense);
+        // Handle User Name
         name.setText(this.currentUser.getFullName());
+
+        // Handle info
         balance.setText(String.format("$%.2f", this.currentUser.getBalance()));
         String[] monthList = getResources().getStringArray(R.array.month_dropdown_items);
         expense.setText(String.format("$%.2f", db.getMonthlyTotal(monthList[Calendar.getInstance().get(Calendar.MONTH)],
