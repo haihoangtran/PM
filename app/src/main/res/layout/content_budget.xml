@@ -95,7 +95,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="89"
-        android:background="@android:color/white"
+        android:background="@color/transparentColor"
         android:divider="@color/viewDataCellBorder"
         android:dividerHeight="1dp"
         android:listSelector="@android:color/darker_gray"

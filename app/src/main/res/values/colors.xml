@@ -10,7 +10,7 @@
     <color name="home_bottom_btn_border_line">#545454</color>
     <color name="transparentColor">#00E5E5E5</color>
     <color name="customBoderLine">#545454</color>
-    <color name="viewDataCellBorder">#2a2a2a</color>
+    <color name="viewDataCellBorder">#6B6A6A</color>
     <color name="bugetDepositTxt">#00a000</color>
     <color name="budgetWithdrawTxt">#FF0000</color>
 </resources>
