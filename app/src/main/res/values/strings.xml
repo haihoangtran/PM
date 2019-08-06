@@ -7,6 +7,7 @@
     <string name="graph_tab">Graph</string>
     <string name="budget_button">Budget</string>
     <string name="payment_button">Payment</string>
+    <string name="place_button">Place</string>
     <string name="title_activity_budget">BudgetActivity</string>
     <string name="budget_title">Budget Management</string>
     <string name="all_budget_tab">All</string>
@@ -45,4 +46,5 @@
     <string name="import_text">Import</string>
     <string name="share_text">Share</string>
     <string name="share_using_title">Share using: </string>
+    <string name="title_activity_place">Place</string>
 </resources>

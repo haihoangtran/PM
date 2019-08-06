@@ -78,8 +78,11 @@ public class HomeActivity extends AppCompatActivity implements UserDialog.OnInpu
         // Handle onClick Budget Management Button
         this.budgetBtnHandle();
 
-        // Handle onClick PaymentModel Button
+        // Handle onClick Payment Button
         this.paymentBtnHandle();
+
+        // Jandle onClick Place Button
+        this.placeBtnHandle();
 
     }
 
@@ -291,11 +294,23 @@ public class HomeActivity extends AppCompatActivity implements UserDialog.OnInpu
 
     // Handle onClick payment button
     private void paymentBtnHandle(){
-        LinearLayout paymentBtn =findViewById(R.id.payment_btn);
+        LinearLayout paymentBtn = findViewById(R.id.payment_btn);
         paymentBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent budgetIntent = new Intent(HomeActivity.this, PaymentActivity.class);
+                startActivity(budgetIntent);
+            }
+        });
+    }
+
+    //Handle on Click place button
+    private void placeBtnHandle(){
+        LinearLayout placeBtn = findViewById(R.id.place_btn);
+        placeBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent budgetIntent = new Intent(HomeActivity.this, PlaceActivity.class);
                 startActivity(budgetIntent);
             }
         });
