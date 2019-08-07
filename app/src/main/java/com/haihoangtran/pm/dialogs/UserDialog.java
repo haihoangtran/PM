@@ -1,4 +1,4 @@
-package com.haihoangtran.pm;
+package com.haihoangtran.pm.dialogs;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -11,6 +11,9 @@ import android.content.Context;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
+
+import com.haihoangtran.pm.R;
+
 import model.UserModel;
 
 public class UserDialog extends DialogFragment {

@@ -1,8 +1,4 @@
-package com.haihoangtran.pm;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.DialogFragment;
+package com.haihoangtran.pm.dialogs;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -13,8 +9,14 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.DialogFragment;
+
+import com.haihoangtran.pm.R;
+
 import model.RecordModel;
-import model.UserModel;
 
 public class BudgetAddEditDialog extends DialogFragment {
 

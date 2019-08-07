@@ -1,4 +1,4 @@
-package com.haihoangtran.pm;
+package com.haihoangtran.pm.adapters;
 
 import android.app.Activity;
 import android.content.Context;
@@ -11,6 +11,8 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+
+import com.haihoangtran.pm.R;
 
 import java.util.ArrayList;
 import java.util.List;

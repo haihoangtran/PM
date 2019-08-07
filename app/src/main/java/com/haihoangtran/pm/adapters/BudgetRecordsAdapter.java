@@ -1,4 +1,4 @@
-package com.haihoangtran.pm;
+package com.haihoangtran.pm.adapters;
 
 
 import android.app.Activity;
@@ -14,9 +14,11 @@ import android.widget.TextView;
 
 import androidx.core.content.ContextCompat;
 
+import com.haihoangtran.pm.R;
+
 import model.RecordModel;
 
-class BudgetRecordsAdapter extends ArrayAdapter<RecordModel> {
+public class BudgetRecordsAdapter extends ArrayAdapter<RecordModel> {
     private Context context;
     private List<RecordModel> records;
 

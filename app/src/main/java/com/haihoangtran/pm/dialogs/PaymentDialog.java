@@ -1,4 +1,4 @@
-package com.haihoangtran.pm;
+package com.haihoangtran.pm.dialogs;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -19,7 +19,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 
-import java.util.ArrayList;
+import com.haihoangtran.pm.R;
+
 import java.util.Calendar;
 import java.util.List;
 import java.util.TimeZone;
@@ -65,7 +66,7 @@ public class PaymentDialog extends DialogFragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.payment_dialog_cell, container, false);
+        View view = inflater.inflate(R.layout.payment_dialog, container, false);
         getDialog().setCanceledOnTouchOutside(false);
         title = view.findViewById(R.id.payment_dialog_title);
         toSpinner = view.findViewById(R.id.pay_to_spinner);
