@@ -19,7 +19,7 @@ import java.util.Enumeration;
 import java.util.List;
 import java.util.TimeZone;
 
-import model.RecordModel;
+import model.BudgetModel;
 import model.UserModel;
 import model.PaymentModel;
 
@@ -134,7 +134,7 @@ public class DBController extends SQLiteOpenHelper {
     // table: Budget
     // field: recordID, year, date, place, amount, typeID (1-deposit, 2- withdraw), typeName
 
-    public void addBudgetRecord(RecordModel newRecord){
+    public void addBudgetRecord(BudgetModel newRecord){
         SQLiteDatabase db = this.getWritableDatabase();
         db.beginTransaction();
         try{
@@ -165,7 +165,7 @@ public class DBController extends SQLiteOpenHelper {
         }
     }
 
-    public ArrayList<RecordModel> getMonthlyRecords(String month, String year, int displayType){
+    public ArrayList<BudgetModel> getMonthlyRecords(String month, String year, int displayType){
         /*
         displayType: 0 - all, 1 - deposit, 2 - withdraw
          */
@@ -183,12 +183,12 @@ public class DBController extends SQLiteOpenHelper {
         }
 
         SQLiteDatabase db = this.getReadableDatabase();
-        ArrayList<RecordModel> records = new ArrayList<>();
+        ArrayList<BudgetModel> records = new ArrayList<>();
         Cursor cursor = db.rawQuery(sql, null);
         try{
             if (cursor.moveToFirst()) {
                 do {
-                    records.add(new RecordModel(cursor.getInt(0), cursor.getString(1),
+                    records.add(new BudgetModel(cursor.getInt(0), cursor.getString(1),
                                                 convertSQLDatetoDate(cursor.getString(2)),
                                                 cursor.getString(3),
                                                 cursor.getDouble(4),
@@ -248,7 +248,7 @@ public class DBController extends SQLiteOpenHelper {
         return total;
     }
 
-    public void deleteRecord(RecordModel record){
+    public void deleteRecord(BudgetModel record){
         SQLiteDatabase db = this.getWritableDatabase();
         int rows = db.delete("Budget", "recordID = " + record.getRecordID(), null);
         db.close();
@@ -262,7 +262,7 @@ public class DBController extends SQLiteOpenHelper {
         }
     }
 
-    public void updateRecord(RecordModel newRecord, RecordModel oldRecord){
+    public void updateRecord(BudgetModel newRecord, BudgetModel oldRecord){
         //delete old
         this.deleteRecord(oldRecord);
         //Add new record

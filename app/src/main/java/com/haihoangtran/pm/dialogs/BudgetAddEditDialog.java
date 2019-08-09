@@ -16,7 +16,7 @@ import androidx.fragment.app.DialogFragment;
 
 import com.haihoangtran.pm.R;
 
-import model.RecordModel;
+import model.BudgetModel;
 
 public class BudgetAddEditDialog extends DialogFragment {
 
@@ -24,17 +24,17 @@ public class BudgetAddEditDialog extends DialogFragment {
     private EditText date, place, amount;
     private CheckBox withdrawCb, depositCb;
     private Button cancelBtn, confirmBtn;
-    private RecordModel initRecord;
+    private BudgetModel initRecord;
     private int actionType;
 
     public interface OnInputListener{
-        void sendRecord(int actionType, RecordModel record, RecordModel oldRecord);
+        void sendRecord(int actionType, BudgetModel record, BudgetModel oldRecord);
     }
 
     public BudgetAddEditDialog.OnInputListener recordInputListener;
 
 
-    public BudgetAddEditDialog(int actionType, RecordModel record) {
+    public BudgetAddEditDialog(int actionType, BudgetModel record) {
         this.actionType = actionType;
         this.initRecord = record;
     }
@@ -137,7 +137,7 @@ public class BudgetAddEditDialog extends DialogFragment {
                 if (record_date.matches("") || record_place.matches("") || record_amount.matches("")){
                     errorTxt.setVisibility(View.VISIBLE);
                 }else {
-                    RecordModel new_record = new RecordModel(initRecord.getRecordID(), record_date.split("/")[2], record_date, record_place,
+                    BudgetModel new_record = new BudgetModel(initRecord.getRecordID(), record_date.split("/")[2], record_date, record_place,
                                                              Double.parseDouble(record_amount), record_typeID, record_typeName);
                     if (actionType == 1) {
                         recordInputListener.sendRecord(actionType, new_record, null);

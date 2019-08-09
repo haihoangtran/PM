@@ -47,4 +47,6 @@
     <string name="share_text">Share</string>
     <string name="share_using_title">Share using: </string>
     <string name="title_activity_place">Place</string>
+    <string name="place_name">Name:</string>
+    <string name="place_address">Address:</string>
 </resources>

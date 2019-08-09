@@ -24,7 +24,7 @@ import java.util.List;
 
 import controller.DBController;
 import model.PaymentModel;
-import model.RecordModel;
+import model.BudgetModel;
 
 public class PaymentActivity extends AppCompatActivity implements PaymentDialog.OnInputListener{
     private DBController db;
@@ -80,7 +80,7 @@ public class PaymentActivity extends AppCompatActivity implements PaymentDialog.
                 break;
             case 2:
                 db.updatePaymentRecord(newRecord, oldRecord.getPaymentID());
-                db.addBudgetRecord(new RecordModel(-1, Integer.toString(Calendar.getInstance().get(Calendar.YEAR)), new SimpleDateFormat("MM/dd/yyyy").format(new Date()), newRecord.getPlace(), paidAmount, 2, getString(R.string.withdraw)));
+                db.addBudgetRecord(new BudgetModel(-1, Integer.toString(Calendar.getInstance().get(Calendar.YEAR)), new SimpleDateFormat("MM/dd/yyyy").format(new Date()), newRecord.getPlace(), paidAmount, 2, getString(R.string.withdraw)));
                 break;
             case 3:
                 db.updatePaymentRecord(newRecord, oldRecord.getPaymentID());

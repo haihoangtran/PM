@@ -3,7 +3,7 @@ package model;
 
 import java.io.Serializable;
 
-public class RecordModel implements Serializable{
+public class BudgetModel implements Serializable{
     private int recordID;
     private String year;
     private String date;
@@ -12,7 +12,7 @@ public class RecordModel implements Serializable{
     private int typeID;
     private String typeName;
 
-    public RecordModel(int recordID, String year, String date, String place, Double amount, int typeID, String typeName){
+    public BudgetModel(int recordID, String year, String date, String place, Double amount, int typeID, String typeName){
         this.recordID = recordID;
         this.year = year;
         this.date = date;

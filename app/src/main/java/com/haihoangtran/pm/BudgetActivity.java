@@ -33,7 +33,7 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
-import model.RecordModel;
+import model.BudgetModel;
 import controller.DBController;
 
 
@@ -93,10 +93,10 @@ public class BudgetActivity extends AppCompatActivity implements BudgetAddEditDi
     *********************************************************/
 
     // --------------           TOP NAVIGATION        --------------
-    // Implement SendUser interface
+    // Implement SendRecord interface
     // action type: 1 - Add , 2 - Edit
     @Override
-    public void sendRecord(int actionType, RecordModel newRecord, RecordModel oldRecord){
+    public void sendRecord(int actionType, BudgetModel newRecord, BudgetModel oldRecord){
         if (actionType == 1){
             db.addBudgetRecord(newRecord);
         }else{
@@ -110,14 +110,14 @@ public class BudgetActivity extends AppCompatActivity implements BudgetAddEditDi
         addBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                RecordModel initialRecord = new RecordModel(-1, Integer.toString(Calendar.getInstance().get(Calendar.YEAR)), new SimpleDateFormat("MM/dd/yyyy").format(new Date()),null, 0.0, 1, null);
+                BudgetModel initialRecord = new BudgetModel(-1, Integer.toString(Calendar.getInstance().get(Calendar.YEAR)), new SimpleDateFormat("MM/dd/yyyy").format(new Date()),null, 0.0, 1, null);
                 addEditDialogHandle(1, initialRecord);
 
             }
         });
     }
     //Handle dialog of add or edit record
-    private void addEditDialogHandle(int actionType, RecordModel record){
+    private void addEditDialogHandle(int actionType, BudgetModel record){
         BudgetAddEditDialog budgetAddEditDialog = new BudgetAddEditDialog(actionType, record);
         budgetAddEditDialog.setStyle(DialogFragment.STYLE_NORMAL, R.style.Theme_AppCompat_Light_Dialog_MinWidth);
         budgetAddEditDialog.show(getSupportFragmentManager(), "BudgetAddEditDialog");
@@ -194,7 +194,7 @@ public class BudgetActivity extends AppCompatActivity implements BudgetAddEditDi
      */
     private void recordsListViewHandle(){
 
-        final ArrayList<RecordModel> records = db.getMonthlyRecords(this.monthDropdown.getSelectedItem().toString(),
+        final ArrayList<BudgetModel> records = db.getMonthlyRecords(this.monthDropdown.getSelectedItem().toString(),
                                                               this.yearDropdown.getSelectedItem().toString(),
                                                               this.displayType);
 

@@ -16,13 +16,13 @@ import androidx.core.content.ContextCompat;
 
 import com.haihoangtran.pm.R;
 
-import model.RecordModel;
+import model.BudgetModel;
 
-public class BudgetRecordsAdapter extends ArrayAdapter<RecordModel> {
+public class BudgetRecordsAdapter extends ArrayAdapter<BudgetModel> {
     private Context context;
-    private List<RecordModel> records;
+    private List<BudgetModel> records;
 
-    public BudgetRecordsAdapter(Context context, int resource, ArrayList<RecordModel> records){
+    public BudgetRecordsAdapter(Context context, int resource, ArrayList<BudgetModel> records){
         super(context, resource, records);
         this.context = context;
         this.records = records;
@@ -30,7 +30,7 @@ public class BudgetRecordsAdapter extends ArrayAdapter<RecordModel> {
 
     public View getView(int position, View convertView, ViewGroup parent) {
         // Get the data item for this position
-        RecordModel record = records.get(position);
+        BudgetModel record = records.get(position);
 
         LayoutInflater inflater = (LayoutInflater)context.getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
         View view = inflater.inflate(R.layout.budget_record_cell, null);
