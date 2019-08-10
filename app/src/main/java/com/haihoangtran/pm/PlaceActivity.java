@@ -1,6 +1,8 @@
 package com.haihoangtran.pm;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -9,15 +11,26 @@ import androidx.fragment.app.DialogFragment;
 
 import android.view.KeyEvent;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.TextView;
 
+import com.baoyz.swipemenulistview.SwipeMenu;
+import com.baoyz.swipemenulistview.SwipeMenuCreator;
+import com.baoyz.swipemenulistview.SwipeMenuItem;
+import com.baoyz.swipemenulistview.SwipeMenuListView;
+import com.haihoangtran.pm.adapters.PlaceRecordsAdapter;
 import com.haihoangtran.pm.dialogs.PlaceDialog;
+
+import java.util.ArrayList;
 
 import controller.DBController;
 import model.PlaceModel;
 
 public class PlaceActivity extends AppCompatActivity implements PlaceDialog.OnInputListener {
     private DBController db;
+    private SwipeMenuListView recordListView;
+    private PlaceModel currentPlace = new PlaceModel(-1, "", "");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +47,9 @@ public class PlaceActivity extends AppCompatActivity implements PlaceDialog.OnIn
 
         // Handle Add Btn
         this.addBtnHandle();
+
+        // Handle Place list view
+        this.recordsListViewHandle();
     }
 
     @Override
@@ -58,13 +74,19 @@ public class PlaceActivity extends AppCompatActivity implements PlaceDialog.OnIn
      public void sendRecord(int actionType, PlaceModel newPlace, PlaceModel oldPlace){
          switch (actionType) {
              case 1:
-                 // Add a new place
+                 db.addPlace(newPlace);
                  break;
              case 2:
-                 // Update old place by new Place
+                 db.updatePlace(newPlace, oldPlace.getPlaceID());
+                 if (oldPlace.getName().equals(currentPlace.getName())){
+                     currentPlace = newPlace;
+                 }
                  break;
          }
-         // Refresh list view
+
+         // Display current address and refresh list view
+         this.displaySelectedPlace();
+         this.recordsListViewHandle();
      }
 
     private void placeDialogHandle(int actionType, PlaceModel place){
@@ -87,4 +109,77 @@ public class PlaceActivity extends AppCompatActivity implements PlaceDialog.OnIn
         });
     }
 
+    // --------------           Selected Place       --------------
+    private void displaySelectedPlace(){
+        TextView selectedName = findViewById(R.id.selected_place_txt);
+        TextView selectedAddr = findViewById(R.id.selected_addr_txt);
+        selectedName.setText(this.currentPlace.getName());
+        selectedAddr.setText(this.currentPlace.getAddress());
+    }
+
+    // --------------          Place List View     --------------
+    private void recordsListViewHandle(){
+
+        final ArrayList<PlaceModel> placeRecords = db.getAllPlaces();
+
+        // Create and Add DataApdater to list view
+        recordListView = findViewById(R.id.place_records_view);
+        PlaceRecordsAdapter recordDataAdapter = new PlaceRecordsAdapter(this, 0, placeRecords);
+        recordListView.setAdapter(recordDataAdapter);
+
+        SwipeMenuCreator creator = new SwipeMenuCreator() {
+            @Override
+            public void create(SwipeMenu menu) {
+                // Create Edit button
+                SwipeMenuItem editItem = new SwipeMenuItem(getApplicationContext());
+                editItem.setBackground(new ColorDrawable(Color.rgb(0x30, 0xB1, 0xF5)));
+                editItem.setWidth(170);
+                editItem.setTitle(R.string.edit);
+                editItem.setTitleSize(18);
+                editItem.setTitleColor(Color.WHITE);
+                menu.addMenuItem(editItem);
+
+                // create "delete" item
+                SwipeMenuItem deleteItem = new SwipeMenuItem(getApplicationContext());
+                deleteItem.setBackground(new ColorDrawable(Color.rgb(0xF9,0x3F, 0x25)));
+                deleteItem.setWidth(170);
+                deleteItem.setIcon(R.drawable.ic_delete);
+                menu.addMenuItem(deleteItem);
+            }
+
+        };
+
+        // Add menu item and handle action on menu items
+        recordListView.setMenuCreator(creator);
+        recordListView.setOnMenuItemClickListener(new SwipeMenuListView.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(int position, SwipeMenu menu, int index) {
+                // position is location of records list (0:), index is location of 2 buttons.
+                switch (index){
+                    case 0:
+                        placeDialogHandle(2, placeRecords.get(position));
+                        break;
+                    case 1:
+                        db.deletePlace(placeRecords.get(position).getPlaceID());
+                        if (placeRecords.get(position).getName().equals(currentPlace.getName())){
+                            currentPlace = new PlaceModel(-1, "", "");
+                        }
+                        displaySelectedPlace();
+                        recordsListViewHandle();
+                        break;
+                }
+                return false;
+            }
+        });
+
+        // Add click action on an item
+        recordListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                currentPlace = placeRecords.get(position);
+                displaySelectedPlace();
+            }
+        });
+
+    }
 }

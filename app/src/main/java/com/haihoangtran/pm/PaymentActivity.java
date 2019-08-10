@@ -107,7 +107,7 @@ public class PaymentActivity extends AppCompatActivity implements PaymentDialog.
             @Override
             public void onClick(View v) {
                 PaymentModel record = new PaymentModel(-1, new SimpleDateFormat("MM/dd/yyyy").format(new Date()), null, 0.00, 0.00, -1,-1,-1);
-                List<String> placeList = db.getAllPlaces();
+                List<String> placeList = db.getAllPaymentPlaces();
                 paymentDialogHandle(1, record, placeList);
             }
         });
@@ -167,7 +167,7 @@ public class PaymentActivity extends AppCompatActivity implements PaymentDialog.
                 // position is location of records list (0:), index is location of 2 buttons.
                 switch (index) {
                     case 0:
-                        paymentDialogHandle(3, records.get(position), db.getAllPlaces());
+                        paymentDialogHandle(3, records.get(position), db.getAllPaymentPlaces());
                         break;
                     case 1:
                         db.deletePaymentRecord(records.get(position));

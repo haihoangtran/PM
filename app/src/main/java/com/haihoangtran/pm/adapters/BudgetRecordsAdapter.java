@@ -11,11 +11,8 @@ import java.util.Locale;
 import android.view.ViewGroup;
 import android.view.LayoutInflater;
 import android.widget.TextView;
-
 import androidx.core.content.ContextCompat;
-
 import com.haihoangtran.pm.R;
-
 import model.BudgetModel;
 
 public class BudgetRecordsAdapter extends ArrayAdapter<BudgetModel> {
@@ -36,10 +33,10 @@ public class BudgetRecordsAdapter extends ArrayAdapter<BudgetModel> {
         View view = inflater.inflate(R.layout.budget_record_cell, null);
 
         // Lookup view for data population
-        TextView placeTxt = (TextView) view.findViewById(R.id.place_txt);
-        TextView dateTxt = (TextView) view.findViewById(R.id.date_txt);
-        TextView typeTxt = (TextView) view.findViewById(R.id.type_txt);
-        TextView amountTxt = (TextView) view.findViewById(R.id.amount_txt);
+        TextView placeTxt = view.findViewById(R.id.place_txt);
+        TextView dateTxt = view.findViewById(R.id.date_txt);
+        TextView typeTxt = view.findViewById(R.id.type_txt);
+        TextView amountTxt = view.findViewById(R.id.amount_txt);
 
         // Populate the data into the template view using the data object
         placeTxt.setText(record.getPlace());

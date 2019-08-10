@@ -20,6 +20,7 @@ import java.util.List;
 import java.util.TimeZone;
 
 import model.BudgetModel;
+import model.PlaceModel;
 import model.UserModel;
 import model.PaymentModel;
 
@@ -43,7 +44,10 @@ public class DBController extends SQLiteOpenHelper {
     }
 
     @Override
-    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion){}
+    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion){
+        // Create Place table
+        this.createPlaceTable(db);
+    }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
@@ -300,7 +304,7 @@ public class DBController extends SQLiteOpenHelper {
         return pRecords;
     }
 
-    public List<String> getAllPlaces(){
+    public List<String> getAllPaymentPlaces(){
         SQLiteDatabase db = this.getReadableDatabase();
         String sql = "select p.place from Payment as p";
         List<String> places = new ArrayList<>();
@@ -460,6 +464,69 @@ public class DBController extends SQLiteOpenHelper {
         db.close();
     }
 
+    //----------------------        PLACE    ----------------------
+    // table: Place
+    // field: placeID, placeName, placeAddr
+
+    public void addPlace(PlaceModel newPlace){
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.beginTransaction();
+        try{
+            ContentValues values = new ContentValues();
+            values.put("placeName", newPlace.getName());
+            values.put("placeAddr", newPlace.getAddress());
+            db.insert("Place", null, values);
+            db.setTransactionSuccessful();
+            db.endTransaction();
+            db.close();
+        }catch(Exception e){
+            e.printStackTrace();
+        }finally {
+            if (db.isOpen()){
+                db.endTransaction();
+                db.close();
+            }
+        }
+    }
+
+    public ArrayList<PlaceModel> getAllPlaces(){
+        SQLiteDatabase db = this.getReadableDatabase();
+        String sql = "select * from Place order by placeName ASC";
+        ArrayList<PlaceModel> placeRecords = new ArrayList<>();
+        Cursor cursor = db.rawQuery(sql, null);
+        try{
+            if (cursor.moveToFirst()) {
+                do {
+                    placeRecords.add(new PlaceModel(cursor.getInt(0),
+                                                    cursor.getString(1),
+                                                    cursor.getString(2)))   ;
+                } while (cursor.moveToNext());
+            }
+        }catch (Exception e){e.printStackTrace();}
+        finally {
+            if (cursor != null && !cursor.isClosed()){
+                cursor.close();
+            }
+        }
+        return placeRecords;
+    }
+
+    public void updatePlace(PlaceModel place, int placeID){
+        // status: 0 - incomplete, 1 - complete
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put("placeName", place.getName());
+        values.put("placeAddr", place.getAddress());
+        db.update("Place", values, "placeID = " + placeID, null);
+        db.close();
+    }
+
+    public void deletePlace(int placeID){
+        SQLiteDatabase db = this.getWritableDatabase();
+        int rows = db.delete("Place", "placeID = " + placeID, null);
+        db.close();
+    }
+
     /* ###################################################################
                             PRIVATE  FUNCTIONS
      ###################################################################*/
@@ -488,7 +555,15 @@ public class DBController extends SQLiteOpenHelper {
                      "date text, place text not null, totalAmount real, defaultAmount real, " +
                      "monthlyStatus integer, currentMonth integer, completed integer)";
         db.execSQL(sql);
+    }
 
+    private void createPlaceTable(SQLiteDatabase db){
+        /*
+        field: placeID, placeName, placeAddr
+         */
+        String sql = "Create table if not exists Place (placeID integer primary key AUTOINCREMENT, " +
+                "placeName text not null, placeAddr text not null)";
+        db.execSQL(sql);
     }
 
     private String convertDatetoSQLDate(String date){
