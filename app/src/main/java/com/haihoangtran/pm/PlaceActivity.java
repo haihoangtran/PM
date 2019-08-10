@@ -3,6 +3,7 @@ package com.haihoangtran.pm;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -13,8 +14,6 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
-import android.widget.TextView;
-
 import com.baoyz.swipemenulistview.SwipeMenu;
 import com.baoyz.swipemenulistview.SwipeMenuCreator;
 import com.baoyz.swipemenulistview.SwipeMenuItem;
@@ -30,7 +29,6 @@ import model.PlaceModel;
 public class PlaceActivity extends AppCompatActivity implements PlaceDialog.OnInputListener {
     private DBController db;
     private SwipeMenuListView recordListView;
-    private PlaceModel currentPlace = new PlaceModel(-1, "", "");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,14 +76,10 @@ public class PlaceActivity extends AppCompatActivity implements PlaceDialog.OnIn
                  break;
              case 2:
                  db.updatePlace(newPlace, oldPlace.getPlaceID());
-                 if (oldPlace.getName().equals(currentPlace.getName())){
-                     currentPlace = newPlace;
-                 }
                  break;
          }
 
          // Display current address and refresh list view
-         this.displaySelectedPlace();
          this.recordsListViewHandle();
      }
 
@@ -107,14 +101,6 @@ public class PlaceActivity extends AppCompatActivity implements PlaceDialog.OnIn
 
             }
         });
-    }
-
-    // --------------           Selected Place       --------------
-    private void displaySelectedPlace(){
-        TextView selectedName = findViewById(R.id.selected_place_txt);
-        TextView selectedAddr = findViewById(R.id.selected_addr_txt);
-        selectedName.setText(this.currentPlace.getName());
-        selectedAddr.setText(this.currentPlace.getAddress());
     }
 
     // --------------          Place List View     --------------
@@ -161,10 +147,6 @@ public class PlaceActivity extends AppCompatActivity implements PlaceDialog.OnIn
                         break;
                     case 1:
                         db.deletePlace(placeRecords.get(position).getPlaceID());
-                        if (placeRecords.get(position).getName().equals(currentPlace.getName())){
-                            currentPlace = new PlaceModel(-1, "", "");
-                        }
-                        displaySelectedPlace();
                         recordsListViewHandle();
                         break;
                 }
@@ -176,8 +158,12 @@ public class PlaceActivity extends AppCompatActivity implements PlaceDialog.OnIn
         recordListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                currentPlace = placeRecords.get(position);
-                displaySelectedPlace();
+                // Open google map app after clicking on item
+                String selectedAddr = placeRecords.get(position).getAddress();
+                Uri adrUri = Uri.parse("geo:0,0?q= " + selectedAddr);
+                Intent mapIntent = new Intent(Intent.ACTION_VIEW, adrUri);
+                mapIntent.setPackage("com.google.android.apps.maps");
+                startActivity(mapIntent);
             }
         });
 
