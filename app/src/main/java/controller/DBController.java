@@ -176,13 +176,13 @@ public class DBController extends SQLiteOpenHelper {
         String sql = "";
         switch (displayType){
             case 0:
-                sql = "select * from Budget as b where strftime('%m', b.date) = '" + month + "' and b.year = '" + year + "' order by b.date DESC";
+                sql = "select * from Budget as b where strftime('%m', b.date) = '" + month + "' and b.year = '" + year + "' order by b.recordID DESC";
                 break;
             case 1:
-                sql = "select * from Budget as b where strftime('%m', b.date) = '" + month + "' and b.year = '" + year + "' and b.typeID = 1 order by b.date DESC";
+                sql = "select * from Budget as b where strftime('%m', b.date) = '" + month + "' and b.year = '" + year + "' and b.typeID = 1 order by b.recordID DESC";
                 break;
             case 2:
-                sql = "select * from Budget as b where strftime('%m', b.date) = '" + month + "' and b.year = '" + year + "' and b.typeID = 2 order by b.date DESC";
+                sql = "select * from Budget as b where strftime('%m', b.date) = '" + month + "' and b.year = '" + year + "' and b.typeID = 2 order by b.recordID DESC";
                 break;
         }
 

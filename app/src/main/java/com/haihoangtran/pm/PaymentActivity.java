@@ -26,7 +26,7 @@ import controller.DBController;
 import model.PaymentModel;
 import model.BudgetModel;
 
-public class PaymentActivity extends AppCompatActivity implements PaymentDialog.OnInputListener{
+public class PaymentActivity extends NavigationBaseActivity implements PaymentDialog.OnInputListener{
     private DBController db;
     private SwipeMenuListView recordListView;
 
@@ -37,8 +37,6 @@ public class PaymentActivity extends AppCompatActivity implements PaymentDialog.
         Toolbar toolbar = findViewById(R.id.title);
         setSupportActionBar(toolbar);
 
-        // Create an Back button next to title
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         // Define variables
         db = DBController.getInstance(PaymentActivity.this);
@@ -52,6 +50,9 @@ public class PaymentActivity extends AppCompatActivity implements PaymentDialog.
         // Handle Payment record list view
         db.refreshPaymentCompleteStatus();
         this.recordsListViewHandle();
+
+        //Handle bottom navigation bar
+        this.navigationHandle(R.id.nav_payment);
 
     }
 

@@ -37,7 +37,7 @@ import model.BudgetModel;
 import controller.DBController;
 
 
-public class BudgetActivity extends AppCompatActivity implements BudgetAddEditDialog.OnInputListener{
+public class BudgetActivity extends NavigationBaseActivity implements BudgetAddEditDialog.OnInputListener{
     private Spinner monthDropdown;
     private Spinner yearDropdown;
     private TabLayout budgetTabLayout;
@@ -52,8 +52,6 @@ public class BudgetActivity extends AppCompatActivity implements BudgetAddEditDi
         Toolbar toolbar = findViewById(R.id.title);
         setSupportActionBar(toolbar);
 
-        // Create an Back button next to title
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         // Define variables
         db = DBController.getInstance(BudgetActivity.this);
@@ -73,6 +71,9 @@ public class BudgetActivity extends AppCompatActivity implements BudgetAddEditDi
 
         // List Record as first display
         this.displayBudgetRecords();
+
+        //Handle bottom navigation bar
+        this.navigationHandle(R.id.nav_budget);
 
     }
 

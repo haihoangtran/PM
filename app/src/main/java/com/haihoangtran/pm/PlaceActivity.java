@@ -26,7 +26,7 @@ import java.util.ArrayList;
 import controller.DBController;
 import model.PlaceModel;
 
-public class PlaceActivity extends AppCompatActivity implements PlaceDialog.OnInputListener {
+public class PlaceActivity extends NavigationBaseActivity implements PlaceDialog.OnInputListener {
     private DBController db;
     private SwipeMenuListView recordListView;
 
@@ -37,8 +37,6 @@ public class PlaceActivity extends AppCompatActivity implements PlaceDialog.OnIn
         Toolbar toolbar = findViewById(R.id.title);
         setSupportActionBar(toolbar);
 
-        // Create an Back button next to title
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         // Define variables
         db = DBController.getInstance(PlaceActivity.this);
@@ -48,6 +46,9 @@ public class PlaceActivity extends AppCompatActivity implements PlaceDialog.OnIn
 
         // Handle Place list view
         this.recordsListViewHandle();
+
+        //Handle bottom navigation bar
+        this.navigationHandle(R.id.nav_place);
     }
 
     @Override

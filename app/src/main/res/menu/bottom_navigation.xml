@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/nav_home"
+        android:enabled="true"
+        android:icon="@drawable/ic_home"
+        android:title="@string/home" />
+    <item
+        android:id="@+id/nav_budget"
+        android:enabled="true"
+        android:icon="@drawable/budget_button"
+        android:title="@string/budget_button" />
+    <item
+        android:id="@+id/nav_payment"
+        android:enabled="true"
+        android:icon="@drawable/payment_button"
+        android:title="@string/payment_button" />
+    <item
+        android:id="@+id/nav_place"
+        android:enabled="true"
+        android:icon="@drawable/place_button"
+        android:title="@string/place_button" />
+
+</menu>

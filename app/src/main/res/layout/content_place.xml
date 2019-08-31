@@ -5,24 +5,32 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:weightSum="100"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".PlaceActivity"
-    tools:showIn="@layout/activity_place">
+    tools:showIn="@layout/activity_place"
+    >
 
 
     <com.baoyz.swipemenulistview.SwipeMenuListView
         android:id="@+id/place_records_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginLeft="10dp"
+        android:layout_marginStart="5dp"
         android:layout_marginTop="5dp"
-        android:layout_marginRight="10dp"
+        android:layout_marginEnd="5dp"
         android:layout_marginBottom="5dp"
-        android:layout_weight="10"
+        android:layout_weight="1"
         android:background="@color/transparentColor"
         android:divider="@color/viewDataCellBorder"
         android:dividerHeight="1dp"
         android:listSelector="@android:color/darker_gray" />
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottom_nav"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:background="@android:color/darker_gray"
+        app:menu="@menu/bottom_navigation" />
 
 </LinearLayout>
