@@ -52,7 +52,7 @@ public class PaymentRecordsAdapter extends ArrayAdapter<PaymentModel> {
         if (record.getCompleted() == 1){
             image.setImageResource(R.drawable.ic_check_box);
         }else{
-            image.setImageResource(R.drawable.ic_uncheck_box);
+            image.setImageResource(R.color.transparentColor);
         }
 
         return view;

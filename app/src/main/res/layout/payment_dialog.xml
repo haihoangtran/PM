@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorAccent"
     android:orientation="vertical"
     android:paddingTop="10dp"
     android:paddingBottom="10dp">
@@ -11,13 +12,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:textColor="@color/activity_title_color"
+        android:textColor="@color/textColor"
         android:textSize="18sp"
         android:textStyle="bold" />
 
     <Spinner
         android:id="@+id/pay_to_spinner"
-        style="@android:style/Widget.Holo.Light.DropDownItem.Spinner"
+        style="@style/Widget.AppCompat.Spinner.DropDown.ActionBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
@@ -31,6 +32,7 @@
         android:ems="10"
         android:hint="New Place/Person Pay To"
         android:inputType="textPersonName"
+        android:textColor="@color/textColor"
         android:textSize="14sp" />
 
     <LinearLayout
@@ -45,6 +47,7 @@
             android:layout_height="wrap_content"
             android:layout_marginRight="3dp"
             android:text="@string/date_label"
+            android:textColor="@color/textColor"
             android:textStyle="bold" />
 
         <EditText
@@ -54,6 +57,7 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:inputType="textPersonName"
+            android:textColor="@color/textColor"
             android:textSize="14sp" />
     </LinearLayout>
 
@@ -69,6 +73,7 @@
             android:layout_height="wrap_content"
             android:layout_marginRight="3dp"
             android:text="@string/total_amount_label"
+            android:textColor="@color/textColor"
             android:textStyle="bold" />
 
         <EditText
@@ -78,6 +83,7 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:inputType="numberDecimal"
+            android:textColor="@color/textColor"
             android:textSize="14sp" />
 
     </LinearLayout>
@@ -94,6 +100,7 @@
             android:layout_height="wrap_content"
             android:layout_marginRight="3dp"
             android:text="@string/default_amount_label"
+            android:textColor="@color/textColor"
             android:textStyle="bold" />
 
         <EditText
@@ -103,6 +110,7 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:inputType="numberDecimal"
+            android:textColor="@color/textColor"
             android:textSize="14sp" />
     </LinearLayout>
 
@@ -119,14 +127,16 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="@string/default_amount_cb" />
+            android:text="@string/default_amount_cb"
+            android:textColor="@color/textColor" />
 
         <CheckBox
             android:id="@+id/custom_amount_cb"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="@string/custom_amount_cb" />
+            android:text="@string/custom_amount_cb"
+            android:textColor="@color/textColor" />
     </LinearLayout>
 
     <EditText
@@ -138,6 +148,7 @@
         android:ems="10"
         android:hint="Custom Paid Amount"
         android:inputType="numberDecimal"
+        android:textColor="@color/textColor"
         android:textSize="14sp" />
 
     <TextView
@@ -145,7 +156,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/empty_value_error"
-        android:textColor="@color/colorAccent"
+        android:textColor="@color/dialogErrorColor"
         android:textSize="12sp" />
 
     <LinearLayout
@@ -169,7 +180,7 @@
                 android:layout_weight="1"
                 android:background="@color/transparentColor"
                 android:text="@string/cancel"
-                android:textColor="@color/colorAccent"
+                android:textColor="@color/textColor"
                 android:textStyle="bold" />
         </LinearLayout>
 
@@ -187,7 +198,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:background="@color/transparentColor"
-                android:textColor="@color/design_default_color_primary_dark"
+                android:textColor="@color/confirmButtonColor"
                 android:textStyle="bold" />
         </LinearLayout>
     </LinearLayout>

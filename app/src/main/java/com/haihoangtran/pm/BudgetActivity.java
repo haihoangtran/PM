@@ -2,7 +2,7 @@ package com.haihoangtran.pm;
 
 import android.content.Intent;
 import android.os.Bundle;
-import androidx.appcompat.app.AppCompatActivity;
+
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.DialogFragment;
@@ -129,7 +129,7 @@ public class BudgetActivity extends NavigationBaseActivity implements BudgetAddE
         this.monthDropdown = (Spinner)findViewById(R.id.month_dropdown);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.month_dropdown_items,
                 android.R.layout.simple_spinner_item);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        adapter.setDropDownViewResource(R.layout.custom_spinner);
         // Apply adapter to spinner
         this.monthDropdown.setAdapter(adapter);
         // Set first selected option
@@ -139,6 +139,7 @@ public class BudgetActivity extends NavigationBaseActivity implements BudgetAddE
         this.monthDropdown.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                ((TextView) parent.getChildAt(0)).setTextColor(ContextCompat.getColor(getBaseContext(), R.color.textColor));
                 displayBudgetRecords();
             }
 
@@ -156,7 +157,7 @@ public class BudgetActivity extends NavigationBaseActivity implements BudgetAddE
         }
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, yearItems);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        adapter.setDropDownViewResource(R.layout.custom_spinner);
         // Apply adapter to spinner
         this.yearDropdown.setAdapter(adapter);
         // Set first selected option
@@ -164,6 +165,7 @@ public class BudgetActivity extends NavigationBaseActivity implements BudgetAddE
         this.yearDropdown.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                ((TextView) parent.getChildAt(0)).setTextColor(ContextCompat.getColor(getBaseContext(), R.color.textColor));
                 displayBudgetRecords();
             }
 

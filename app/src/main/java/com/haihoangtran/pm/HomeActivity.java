@@ -1,5 +1,6 @@
 package com.haihoangtran.pm;
 
+import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
@@ -248,7 +249,11 @@ public class HomeActivity extends AppCompatActivity implements UserDialog.OnInpu
         graphView.getViewport().setMinX(1);
         graphView.getViewport().setMaxX(12);
         graphView.getGridLabelRenderer().setNumHorizontalLabels(12);
+        graphView.getGridLabelRenderer().setGridColor(ContextCompat.getColor(this, R.color.colorPrimaryDark));
+        graphView.getGridLabelRenderer().setVerticalLabelsColor(ContextCompat.getColor(this, R.color.textColor));
+        graphView.getGridLabelRenderer().setHorizontalLabelsColor(ContextCompat.getColor(this, R.color.textColor));
         graphView.setTitle(currentYear);
+        graphView.setTitleColor(ContextCompat.getColor(this, R.color.textColor));
 
         // Add linear graph series to graph view
         graphView.addSeries(depositSeries);

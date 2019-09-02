@@ -3,5 +3,5 @@
     <solid android:color="@color/transparentColor"/>
     <stroke
         android:width="3px"
-        android:color="@color/customBoderLine" />
+        android:color="@color/customBorderLine" />
 </shape>

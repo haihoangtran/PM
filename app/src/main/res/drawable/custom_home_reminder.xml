@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <shape xmlns:android="http://schemas.android.com/apk/res/android">
-    <solid android:color="@color/home_reminder_background"/>
+    <solid android:color="@color/transparentColor"/>
     <stroke
         android:width="3px"
-        android:color="@color/home_bottom_btn_border_line" />
+        android:color="@color/homeReminderBorderLine" />
 </shape>

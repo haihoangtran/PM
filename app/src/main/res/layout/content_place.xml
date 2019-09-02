@@ -4,11 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
     android:orientation="vertical"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".PlaceActivity"
-    tools:showIn="@layout/activity_place"
-    >
+    tools:showIn="@layout/activity_place">
 
 
     <com.baoyz.swipemenulistview.SwipeMenuListView
@@ -30,7 +30,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
-        android:background="@android:color/darker_gray"
+        android:background="@color/bottomNavColor"
         app:menu="@menu/bottom_navigation" />
 
 </LinearLayout>

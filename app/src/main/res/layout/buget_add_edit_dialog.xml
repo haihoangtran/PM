@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorAccent"
     android:orientation="vertical"
     android:paddingTop="10dp"
     android:paddingBottom="10dp">
@@ -13,7 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:textColor="@color/activity_title_color"
+        android:textColor="@color/textColor"
         android:textSize="18sp"
         android:textStyle="bold" />
 
@@ -28,6 +29,7 @@
             android:layout_height="wrap_content"
             android:layout_marginRight="3dp"
             android:text="@string/date_label"
+            android:textColor="@color/textColor"
             android:textStyle="bold" />
 
         <EditText
@@ -37,7 +39,8 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:inputType="textPersonName"
-            android:textAppearance="@style/TextAppearance.AppCompat.Small" />
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            android:textColor="@color/textColor" />
     </LinearLayout>
 
     <LinearLayout
@@ -51,6 +54,7 @@
             android:layout_height="wrap_content"
             android:layout_marginRight="3dp"
             android:text="@string/to_lable"
+            android:textColor="@color/textColor"
             android:textStyle="bold" />
 
         <EditText
@@ -60,7 +64,8 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:inputType="textPersonName"
-            android:textAppearance="@style/TextAppearance.AppCompat.Small" />
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            android:textColor="@color/textColor" />
     </LinearLayout>
 
     <LinearLayout
@@ -74,6 +79,7 @@
             android:layout_height="wrap_content"
             android:layout_marginRight="3dp"
             android:text="@string/amount_lable"
+            android:textColor="@color/textColor"
             android:textStyle="bold" />
 
         <EditText
@@ -83,7 +89,8 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:inputType="numberDecimal"
-            android:textAppearance="@style/TextAppearance.AppCompat.Small" />
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            android:textColor="@color/textColor" />
     </LinearLayout>
 
     <LinearLayout
@@ -100,14 +107,16 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="@string/withdraw" />
+            android:text="@string/withdraw"
+            android:textColor="@color/textColor" />
 
         <CheckBox
             android:id="@+id/deposit_cb"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="@string/deposit" />
+            android:text="@string/deposit"
+            android:textColor="@color/textColor" />
 
     </LinearLayout>
 
@@ -116,7 +125,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/empty_value_error"
-        android:textColor="@color/colorAccent"
+        android:textColor="@color/dialogErrorColor"
         android:textSize="12sp"
         tools:visibility="invisible" />
 
@@ -141,7 +150,7 @@
                 android:layout_weight="1"
                 android:background="@color/transparentColor"
                 android:text="@string/cancel"
-                android:textColor="@color/colorAccent"
+                android:textColor="@color/textColor"
                 android:textStyle="bold" />
         </LinearLayout>
 
@@ -159,7 +168,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:background="@color/transparentColor"
-                android:textColor="@color/design_default_color_primary_dark"
+                android:textColor="@color/confirmButtonColor"
                 android:textStyle="bold" />
         </LinearLayout>
 

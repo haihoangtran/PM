@@ -25,6 +25,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="serif-monospace"
+                android:textColor="@color/textColor"
                 android:textSize="16sp"
                 android:textStyle="bold" />
 
@@ -33,6 +34,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="serif-monospace"
+                android:textColor="@color/textColor"
                 android:textSize="12sp" />
         </LinearLayout>
     </LinearLayout>
@@ -69,6 +71,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:textAlignment="viewStart"
+            android:textColor="@color/textColor"
             android:textSize="15sp" />
     </LinearLayout>
 </LinearLayout>

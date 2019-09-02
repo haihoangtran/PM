@@ -17,6 +17,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.DialogFragment;
 
 import com.haihoangtran.pm.R;
@@ -160,13 +161,14 @@ public class PaymentDialog extends DialogFragment {
     // Handle toSpinner
     private void toSpinnerHandle(){
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, this.placeList);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        adapter.setDropDownViewResource(R.layout.custom_spinner);
         this.toSpinner.setAdapter(adapter);
         if (this.actionType == 1)
             this.toSpinner.setSelection(0);
         this.toSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                ((TextView) parent.getChildAt(0)).setTextColor(ContextCompat.getColor(getActivity(), R.color.textColor));
                 if (actionType == 1 && placeList.get(position).equals(getString(R.string.new_payment))) {
                     paidTo.setVisibility(View.VISIBLE);
                     paidTo.setText("");

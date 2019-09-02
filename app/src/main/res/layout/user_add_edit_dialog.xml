@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorAccent"
     android:orientation="vertical"
     android:paddingTop="10dp"
     android:paddingBottom="10dp">
@@ -13,7 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:textColor="@color/activity_title_color"
+        android:textColor="@color/textColor"
         android:textSize="18sp"
         android:textStyle="bold" />
 
@@ -25,7 +26,8 @@
         android:ems="10"
         android:hint="Full Name"
         android:inputType="textPersonName"
-        android:textAppearance="@style/TextAppearance.AppCompat.Small" />
+        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+        android:textColor="@color/textColor" />
 
     <EditText
         android:id="@+id/user_balance_edit_text"
@@ -35,14 +37,15 @@
         android:ems="10"
         android:hint="Balance"
         android:inputType="numberDecimal"
-        android:textAppearance="@style/TextAppearance.AppCompat.Small" />
+        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+        android:textColor="@color/textColor" />
 
     <TextView
         android:id="@+id/error_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/empty_value_error"
-        android:textColor="@color/colorAccent"
+        android:textColor="@color/textColor"
         android:textSize="12sp"
         tools:visibility="invisible" />
 
@@ -67,7 +70,7 @@
                 android:layout_weight="1"
                 android:background="@color/transparentColor"
                 android:text="@string/cancel"
-                android:textColor="@color/colorAccent"
+                android:textColor="@color/textColor"
                 android:textStyle="bold" />
         </LinearLayout>
 
@@ -85,7 +88,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:background="@color/transparentColor"
-                android:textColor="@color/design_default_color_primary_dark"
+                android:textColor="@color/confirmButtonColor"
                 android:textStyle="bold"
                 android:visibility="visible" />
         </LinearLayout>

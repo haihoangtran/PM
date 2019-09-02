@@ -17,6 +17,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="serif-monospace"
+            android:textColor="@color/textColor"
             android:textSize="16sp"
             android:textStyle="bold" />
 
@@ -25,7 +26,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="serif-monospace"
-            android:textColor="@android:color/secondary_text_light"
+            android:textColor="@color/textColor"
             android:textSize="12sp" />
     </LinearLayout>
 
@@ -43,7 +44,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center"
-            android:textColor="@android:color/widget_edittext_dark" />
+            android:textColor="@color/textColor" />
 
         <TextView
             android:id="@+id/total_amount_txt"
@@ -51,7 +52,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center"
-            android:textColor="@android:color/secondary_text_light"
+            android:textColor="@color/textColor"
             android:textStyle="bold" />
 
     </LinearLayout>
