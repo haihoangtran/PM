@@ -249,7 +249,7 @@ public class HomeActivity extends AppCompatActivity implements UserDialog.OnInpu
         graphView.getViewport().setMinX(1);
         graphView.getViewport().setMaxX(12);
         graphView.getGridLabelRenderer().setNumHorizontalLabels(12);
-        graphView.getGridLabelRenderer().setGridColor(ContextCompat.getColor(this, R.color.colorPrimaryDark));
+        graphView.getGridLabelRenderer().setGridColor(ContextCompat.getColor(this, R.color.graphViewColor));
         graphView.getGridLabelRenderer().setVerticalLabelsColor(ContextCompat.getColor(this, R.color.textColor));
         graphView.getGridLabelRenderer().setHorizontalLabelsColor(ContextCompat.getColor(this, R.color.textColor));
         graphView.setTitle(currentYear);
