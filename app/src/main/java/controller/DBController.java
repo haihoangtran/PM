@@ -59,6 +59,9 @@ public class DBController extends SQLiteOpenHelper {
 
         //Create Payment table
         this.createPaymentTable(db);
+
+        // Create Place table
+        this.createPlaceTable(db);
     }
 
     @Override
