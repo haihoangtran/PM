@@ -10,62 +10,62 @@
     tools:context=".HomeActivity"
     tools:showIn="@layout/activity_home">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="4"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="5"
+            android:layout_weight="1"
             android:gravity="center"
-            android:orientation="horizontal"
-            android:paddingLeft="20dp"
-            android:paddingRight="20dp">
+            android:orientation="vertical">
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+            <TextView
+                android:id="@+id/user_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/user_name"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="10dp"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:text="Hai Tran"
-                    android:textColor="@color/userNameColor"
-                    android:textSize="28sp"
-                    android:textStyle="bold"
-                    tools:text="Hai Tran" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/user_balance"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="10dp"
-                    android:textColor="@color/textColor"
-                    android:textSize="18sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/user_expense"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/budgetWithdrawTxt"
-                    android:textSize="18sp"
-                    android:textStyle="bold" />
-            </LinearLayout>
-
+                android:text="Hai Tran"
+                android:textColor="@color/userNameColor"
+                android:textSize="28sp"
+                android:textStyle="bold"
+                tools:text="Hai Tran" />
         </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/user_balance"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:textColor="@color/textColor"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/user_expense"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/budgetWithdrawTxt"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+    </LinearLayout>
 
     <LinearLayout
         android:id="@+id/reminder_layout"
@@ -140,88 +140,52 @@
 
     </LinearLayout>
 
+    <LinearLayout
+        android:id="@+id/buttons_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="15dp"
+        android:layout_weight="3"
+        android:orientation="vertical">
+
         <LinearLayout
-            android:id="@+id/buttons_layout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginStart="15dp"
-            android:layout_marginEnd="15dp"
-            android:layout_weight="4"
-            android:orientation="vertical">
+            android:layout_weight="1"
+            android:orientation="horizontal">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:orientation="horizontal">
+                android:gravity="center"
+                android:orientation="vertical">
 
                 <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="center"
+                    android:id="@+id/payment_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@color/transparentColor"
+                    android:clickable="true"
                     android:orientation="vertical">
 
-                    <LinearLayout
-                        android:id="@+id/payment_btn"
+                    <ImageView
+                        android:id="@+id/payment_btn_img"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:background="@color/transparentColor"
-                        android:clickable="true"
-                        android:orientation="vertical">
+                        app:srcCompat="@drawable/payment_button" />
 
-                        <ImageView
-                            android:id="@+id/payment_btn_img"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            app:srcCompat="@drawable/payment_button" />
-
-                        <TextView
-                            android:id="@+id/payment_btn_text"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:fontFamily="sans-serif-black"
-                            android:text="@string/payment_button"
-                            android:textColor="@color/textColor"
-                            android:textSize="15sp"
-                            android:textStyle="bold" />
-                    </LinearLayout>
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:orientation="horizontal">
-
-                    <LinearLayout
-                        android:id="@+id/budget_btn"
+                    <TextView
+                        android:id="@+id/payment_btn_text"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:clickable="true"
-                        android:orientation="vertical">
-
-                        <ImageView
-                            android:id="@+id/budget_btn_img"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            app:srcCompat="@drawable/budget_button" />
-
-                        <TextView
-                            android:id="@+id/budget_btn_text"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:fontFamily="sans-serif-black"
-                            android:text="@string/budget_button"
-                            android:textColor="@color/textColor"
-                            android:textSize="15sp"
-                            android:textStyle="bold" />
-                    </LinearLayout>
-
+                        android:layout_gravity="center"
+                        android:fontFamily="sans-serif-black"
+                        android:text="@string/payment_button"
+                        android:textColor="@color/textColor"
+                        android:textSize="15sp"
+                        android:textStyle="bold" />
                 </LinearLayout>
 
             </LinearLayout>
@@ -230,54 +194,90 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
+                android:gravity="center"
                 android:orientation="horizontal">
 
                 <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:orientation="vertical">
-
-                    <LinearLayout
-                        android:id="@+id/place_btn"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:clickable="true"
-                        android:orientation="vertical">
-
-                        <ImageView
-                            android:id="@+id/imageView"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            app:srcCompat="@drawable/place_button" />
-
-                        <TextView
-                            android:id="@+id/place_btn_text"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:fontFamily="sans-serif-black"
-                            android:text="@string/place_button"
-                            android:textColor="@color/textColor"
-                            android:textSize="15sp"
-                            android:textStyle="bold" />
-                    </LinearLayout>
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
+                    android:id="@+id/budget_btn"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center"
+                    android:clickable="true"
                     android:orientation="vertical">
 
-                    <LinearLayout
+                    <ImageView
+                        android:id="@+id/budget_btn_img"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical"></LinearLayout>
+                        app:srcCompat="@drawable/budget_button" />
+
+                    <TextView
+                        android:id="@+id/budget_btn_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:fontFamily="sans-serif-black"
+                        android:text="@string/budget_button"
+                        android:textColor="@color/textColor"
+                        android:textSize="15sp"
+                        android:textStyle="bold" />
                 </LinearLayout>
+
             </LinearLayout>
 
         </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:id="@+id/place_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:clickable="true"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:id="@+id/imageView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:srcCompat="@drawable/place_button" />
+
+                    <TextView
+                        android:id="@+id/place_btn_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:fontFamily="sans-serif-black"
+                        android:text="@string/place_button"
+                        android:textColor="@color/textColor"
+                        android:textSize="15sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"></LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+
+    </LinearLayout>
 </LinearLayout>
