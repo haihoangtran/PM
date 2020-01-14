@@ -21,7 +21,7 @@
         android:gravity="center"
         android:text="@string/welcome_personal_management"
         android:textAlignment="center"
-        android:textColor="#32D589"
+        android:textColor="#00FFFF"
         android:textColorHint="@color/design_default_color_primary"
         android:textSize="36sp"
         android:textStyle="bold|italic"
