@@ -1,6 +1,5 @@
 package com.haihoangtran.pm;
 
-import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
@@ -178,7 +177,8 @@ public class HomeActivity extends AppCompatActivity implements UserDialog.OnInpu
     private void displayUserInfo(){
         TextView name = findViewById(R.id.user_name);
         TextView balance = findViewById(R.id.user_balance);
-        TextView expense = findViewById(R.id.user_expense);
+        TextView expense = findViewById(R.id.monthly_expense);
+        TextView deposit = findViewById(R.id.monthly_deposit);
         // Handle User Name
         name.setText(this.currentUser.getFullName());
 
@@ -188,6 +188,9 @@ public class HomeActivity extends AppCompatActivity implements UserDialog.OnInpu
         expense.setText(String.format("$%.2f", db.getMonthlyTotal(monthList[Calendar.getInstance().get(Calendar.MONTH)],
                                                                   Integer.toString(Calendar.getInstance().get(Calendar.YEAR)),
                                                                  2)));
+        deposit.setText(String.format("$%.2f", db.getMonthlyTotal(monthList[Calendar.getInstance().get(Calendar.MONTH)],
+                Integer.toString(Calendar.getInstance().get(Calendar.YEAR)),
+                1)));
     }
 
     // --------------           TAB BAR        --------------
