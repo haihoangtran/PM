@@ -30,11 +30,6 @@ public class NavigationBaseActivity extends AppCompatActivity {
                         Intent paymentIntent = new Intent(NavigationBaseActivity.this, PaymentActivity.class);
                         startActivity(paymentIntent);
                         break;
-
-                    case R.id.nav_place:
-                        Intent placeIntent = new Intent(NavigationBaseActivity.this, PlaceActivity.class);
-                        startActivity(placeIntent);
-                        break;
                 }
                 return true;
             }

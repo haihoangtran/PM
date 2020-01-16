@@ -5,11 +5,9 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.DialogFragment;
-
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.AdapterView;
@@ -20,13 +18,11 @@ import com.baoyz.swipemenulistview.SwipeMenuItem;
 import com.baoyz.swipemenulistview.SwipeMenuListView;
 import com.haihoangtran.pm.adapters.PlaceRecordsAdapter;
 import com.haihoangtran.pm.dialogs.PlaceDialog;
-
 import java.util.ArrayList;
-
 import controller.DBController;
 import model.PlaceModel;
 
-public class PlaceActivity extends NavigationBaseActivity implements PlaceDialog.OnInputListener {
+public class PlaceActivity extends AppCompatActivity implements PlaceDialog.OnInputListener {
     private DBController db;
     private SwipeMenuListView recordListView;
 
@@ -46,9 +42,6 @@ public class PlaceActivity extends NavigationBaseActivity implements PlaceDialog
 
         // Handle Place list view
         this.recordsListViewHandle();
-
-        //Handle bottom navigation bar
-        this.navigationHandle(R.id.nav_place);
     }
 
     @Override

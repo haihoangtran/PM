@@ -16,10 +16,5 @@
         android:enabled="true"
         android:icon="@drawable/payment_button"
         android:title="@string/payment_button" />
-    <item
-        android:id="@+id/nav_place"
-        android:enabled="true"
-        android:icon="@drawable/place_button"
-        android:title="@string/place_button" />
 
 </menu>
