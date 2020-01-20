@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.Locale;
 import android.view.ViewGroup;
 import android.view.LayoutInflater;
+import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.core.content.ContextCompat;
 import com.haihoangtran.pm.R;
@@ -35,7 +36,7 @@ public class BudgetRecordsAdapter extends ArrayAdapter<BudgetModel> {
         // Lookup view for data population
         TextView placeTxt = view.findViewById(R.id.place_txt);
         TextView dateTxt = view.findViewById(R.id.date_txt);
-        TextView typeTxt = view.findViewById(R.id.type_txt);
+        ImageView emotionalFace = view.findViewById(R.id.emotion_face);
         TextView amountTxt = view.findViewById(R.id.amount_txt);
 
         // Populate the data into the template view using the data object
@@ -45,12 +46,10 @@ public class BudgetRecordsAdapter extends ArrayAdapter<BudgetModel> {
 
 
         //Update color base on typeTxt
-        typeTxt.setText(record.getTypeName());
         if(record.getTypeID() == 1){
-
-            typeTxt.setTextColor(ContextCompat.getColor(this.context, R.color.bugetDepositTxt));
+            emotionalFace.setImageResource(R.drawable.happy_face);
         }else{
-            typeTxt.setTextColor(ContextCompat.getColor(this.context, R.color.budgetWithdrawTxt));
+            emotionalFace.setImageResource(R.drawable.sad_face);
         }
 
         // Return the completed view to render on screen
