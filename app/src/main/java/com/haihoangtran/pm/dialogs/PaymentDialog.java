@@ -14,20 +14,16 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.DialogFragment;
-
 import com.haihoangtran.pm.R;
-
 import java.util.Calendar;
 import java.util.List;
 import java.util.TimeZone;
-
+import controller.database.PaymentDB;
 import model.PaymentModel;
-import controller.DBController;
 
 public class PaymentDialog extends DialogFragment {
     private TextView title;
@@ -177,8 +173,8 @@ public class PaymentDialog extends DialogFragment {
                     paidTo.setVisibility(View.INVISIBLE);
                 }
                 if(actionType == 2){
-                    DBController db = DBController.getInstance(getActivity());
-                    paymentRecord = db.getPaymentRecodsByPlace(placeList.get(position)).get(0);
+                    PaymentDB paymentDB = PaymentDB.getInstance(getActivity());
+                    paymentRecord = paymentDB.getPaymentRecodsByPlace(placeList.get(position)).get(0);
                     totalAmount.setText(String.format("%.2f", paymentRecord.getTotalAmount()));
                     defaultAmount.setText(String.format("%.2f", paymentRecord.getDefaultAmount()));
                 }

@@ -27,20 +27,23 @@ import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.series.DataPoint;
 import com.jjoe64.graphview.series.LineGraphSeries;
 import com.google.android.material.tabs.TabLayout;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.List;
-import controller.DBController;
 import controller.FileController;
 import model.PaymentModel;
 import model.UserModel;
+import controller.database.UserDB;
+import controller.database.BudgetDB;
+import controller.database.PaymentDB;
 
 public class HomeActivity extends AppCompatActivity implements UserDialog.OnInputListener {
-    private DBController db;
+    private UserDB userDB;
+    private BudgetDB buggetDB;
+    private PaymentDB paymentDB;
     private FileController fileController;
     private UserModel currentUser;
     private TabLayout homeTabLayout;
@@ -58,12 +61,14 @@ public class HomeActivity extends AppCompatActivity implements UserDialog.OnInpu
         ActivityCompat.requestPermissions(HomeActivity.this, new String[] {Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
 
         // Define some variable
-        db = DBController.getInstance(HomeActivity.this);
+        userDB = UserDB.getInstance(HomeActivity.this);
+        buggetDB = BudgetDB.getInstance(HomeActivity.this);
+        paymentDB = PaymentDB.getInstance(HomeActivity.this);
         fileController = new FileController(HomeActivity.this);
         currentUser = new UserModel("", 0.0);
 
         // Initialize Payment status
-        db.refreshPaymentMonthlyStatus();
+        paymentDB.refreshPaymentMonthlyStatus();
 
         // Handle user
         this.userHandle();
@@ -148,16 +153,16 @@ public class HomeActivity extends AppCompatActivity implements UserDialog.OnInpu
     @Override
     public void sendUser(int actionType, UserModel user){
         if (actionType == 1){
-            db.addUser(user.getFullName(), user.getBalance());
+            userDB.addUser(user.getFullName(), user.getBalance());
         }else{
-            db.updateUser(this.currentUser, user);
+            userDB.updateUser(this.currentUser, user);
         }
         this.currentUser = user;
         displayUserInfo();
     }
 
     private void userHandle(){
-        ArrayList<UserModel> users = db.getUser();
+        ArrayList<UserModel> users = userDB.getUser();
         if (users.size() < 1){
             addEditUserDialog(1, new UserModel("", 0.0));
         }else{
@@ -185,10 +190,10 @@ public class HomeActivity extends AppCompatActivity implements UserDialog.OnInpu
         // Handle info
         balance.setText(String.format("$%.2f", this.currentUser.getBalance()));
         String[] monthList = getResources().getStringArray(R.array.month_dropdown_items);
-        expense.setText(String.format("$%.2f", db.getMonthlyTotal(monthList[Calendar.getInstance().get(Calendar.MONTH)],
+        expense.setText(String.format("$%.2f", buggetDB.getMonthlyTotal(monthList[Calendar.getInstance().get(Calendar.MONTH)],
                                                                   Integer.toString(Calendar.getInstance().get(Calendar.YEAR)),
                                                                  2)));
-        deposit.setText(String.format("$%.2f", db.getMonthlyTotal(monthList[Calendar.getInstance().get(Calendar.MONTH)],
+        deposit.setText(String.format("$%.2f", buggetDB.getMonthlyTotal(monthList[Calendar.getInstance().get(Calendar.MONTH)],
                 Integer.toString(Calendar.getInstance().get(Calendar.YEAR)),
                 1)));
     }
@@ -226,8 +231,8 @@ public class HomeActivity extends AppCompatActivity implements UserDialog.OnInpu
         List<Double> withdrawTotals = new ArrayList<Double>(Collections.nCopies(12, 0.00));
         String currentYear = Integer.toString(Calendar.getInstance().get(Calendar.YEAR));
         for (int i = 1; i <= 12; ++i){
-            depositTotals.set(i -1, db.getMonthlyTotal(monthList[i-1], currentYear, 1));
-            withdrawTotals.set(i -1, db.getMonthlyTotal(monthList[i-1], currentYear, 2));
+            depositTotals.set(i -1, buggetDB.getMonthlyTotal(monthList[i-1], currentYear, 1));
+            withdrawTotals.set(i -1, buggetDB.getMonthlyTotal(monthList[i-1], currentYear, 2));
         }
 
         // Create Data Point and Linear Graph Series
@@ -273,7 +278,7 @@ public class HomeActivity extends AppCompatActivity implements UserDialog.OnInpu
     // --------------           REMINDER VIEW       --------------
     private void reminderListViewHandle() {
 
-        final ArrayList<PaymentModel> records = db.getAllPaymentRecords();
+        final ArrayList<PaymentModel> records = paymentDB.getAllPaymentRecords();
         HomeReminderAdapter adapter = new HomeReminderAdapter(this, 0, records);
         //Create a list view
         ListView reminderLv = new ListView(this);

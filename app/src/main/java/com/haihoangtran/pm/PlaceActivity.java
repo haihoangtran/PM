@@ -19,11 +19,11 @@ import com.baoyz.swipemenulistview.SwipeMenuListView;
 import com.haihoangtran.pm.adapters.PlaceRecordsAdapter;
 import com.haihoangtran.pm.dialogs.PlaceDialog;
 import java.util.ArrayList;
-import controller.DBController;
 import model.PlaceModel;
+import  controller.database.PlaceDB;
 
 public class PlaceActivity extends AppCompatActivity implements PlaceDialog.OnInputListener {
-    private DBController db;
+    private PlaceDB placeDB;
     private SwipeMenuListView recordListView;
 
     @Override
@@ -35,7 +35,7 @@ public class PlaceActivity extends AppCompatActivity implements PlaceDialog.OnIn
 
 
         // Define variables
-        db = DBController.getInstance(PlaceActivity.this);
+        placeDB = PlaceDB.getInstance(PlaceActivity.this);
 
         // Handle Add Btn
         this.addBtnHandle();
@@ -66,10 +66,10 @@ public class PlaceActivity extends AppCompatActivity implements PlaceDialog.OnIn
      public void sendRecord(int actionType, PlaceModel newPlace, PlaceModel oldPlace){
          switch (actionType) {
              case 1:
-                 db.addPlace(newPlace);
+                 placeDB.addPlace(newPlace);
                  break;
              case 2:
-                 db.updatePlace(newPlace, oldPlace.getPlaceID());
+                 placeDB.updatePlace(newPlace, oldPlace.getPlaceID());
                  break;
          }
 
@@ -100,7 +100,7 @@ public class PlaceActivity extends AppCompatActivity implements PlaceDialog.OnIn
     // --------------          Place List View     --------------
     private void recordsListViewHandle(){
 
-        final ArrayList<PlaceModel> placeRecords = db.getAllPlaces();
+        final ArrayList<PlaceModel> placeRecords = placeDB.getAllPlaces();
 
         // Create and Add DataApdater to list view
         recordListView = findViewById(R.id.place_records_view);
@@ -140,7 +140,7 @@ public class PlaceActivity extends AppCompatActivity implements PlaceDialog.OnIn
                         placeDialogHandle(2, placeRecords.get(position));
                         break;
                     case 1:
-                        db.deletePlace(placeRecords.get(position).getPlaceID());
+                        placeDB.deletePlace(placeRecords.get(position).getPlaceID());
                         recordsListViewHandle();
                         break;
                 }

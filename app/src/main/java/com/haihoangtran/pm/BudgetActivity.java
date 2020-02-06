@@ -34,7 +34,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 import model.BudgetModel;
-import controller.DBController;
+import controller.database.BudgetDB;
 
 
 public class BudgetActivity extends NavigationBaseActivity implements BudgetAddEditDialog.OnInputListener{
@@ -42,7 +42,7 @@ public class BudgetActivity extends NavigationBaseActivity implements BudgetAddE
     private Spinner yearDropdown;
     private TabLayout budgetTabLayout;
     private SwipeMenuListView recordListView;
-    private DBController db;
+    private BudgetDB budgetDB;
     private int displayType = 0;
 
     @Override
@@ -54,7 +54,7 @@ public class BudgetActivity extends NavigationBaseActivity implements BudgetAddE
 
 
         // Define variables
-        db = DBController.getInstance(BudgetActivity.this);
+        budgetDB = budgetDB.getInstance(BudgetActivity.this);
 
         //Handle Add icon button
         this.addBtnHandle();
@@ -99,9 +99,9 @@ public class BudgetActivity extends NavigationBaseActivity implements BudgetAddE
     @Override
     public void sendRecord(int actionType, BudgetModel newRecord, BudgetModel oldRecord){
         if (actionType == 1){
-            db.addBudgetRecord(newRecord);
+            budgetDB.addBudgetRecord(newRecord);
         }else{
-            db.updateRecord(newRecord, oldRecord);
+            budgetDB.updateRecord(newRecord, oldRecord);
         }
         this.displayBudgetRecords();
     }
@@ -151,7 +151,7 @@ public class BudgetActivity extends NavigationBaseActivity implements BudgetAddE
     private void yearDropdownHandle(){
         this.yearDropdown = findViewById(R.id.year_dropdown);
         List<String> yearItems = new ArrayList<>();
-        yearItems = db.getYears();
+        yearItems = budgetDB.getYears();
         if (yearItems.isEmpty()){
             yearItems.add(Integer.toString(Calendar.getInstance().get(Calendar.YEAR)));
         }
@@ -197,7 +197,7 @@ public class BudgetActivity extends NavigationBaseActivity implements BudgetAddE
      */
     private void recordsListViewHandle(){
 
-        final ArrayList<BudgetModel> records = db.getMonthlyRecords(this.monthDropdown.getSelectedItem().toString(),
+        final ArrayList<BudgetModel> records = budgetDB.getMonthlyRecords(this.monthDropdown.getSelectedItem().toString(),
                                                               this.yearDropdown.getSelectedItem().toString(),
                                                               this.displayType);
 
@@ -239,7 +239,7 @@ public class BudgetActivity extends NavigationBaseActivity implements BudgetAddE
                         addEditDialogHandle(2, records.get(position));
                         break;
                     case 1:
-                        db.deleteRecord(records.get(position));
+                        budgetDB.deleteRecord(records.get(position));
                         displayBudgetRecords();
                         break;
                 }
@@ -254,7 +254,7 @@ public class BudgetActivity extends NavigationBaseActivity implements BudgetAddE
         TextView monthlyTotal = findViewById(R.id.monthly_total_text);
         Double total = 0.0;
         if (this.displayType != 0){
-            total = db.getMonthlyTotal(this.monthDropdown.getSelectedItem().toString(),
+            total = budgetDB.getMonthlyTotal(this.monthDropdown.getSelectedItem().toString(),
                     this.yearDropdown.getSelectedItem().toString(),
                     this.displayType);
             monthlyTotal.setText(String.format("$%.2f", total));
