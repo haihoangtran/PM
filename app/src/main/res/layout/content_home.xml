@@ -98,7 +98,7 @@
         android:layout_height="match_parent"
         android:layout_weight="3"
         android:orientation="vertical"
-        android:paddingStart=" 15dp"
+        android:paddingStart="15dp"
         android:paddingEnd="15dp">
 
         <LinearLayout
