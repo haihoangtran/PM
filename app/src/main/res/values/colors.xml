@@ -16,4 +16,5 @@
     <color name="bottomNavColor">#AAAAAA</color>
     <color name="dialogErrorColor">#FF0000</color>
     <color name="confirmButtonColor">#303F9F</color>
+    <color name="paymentSubTitleColor">#9DF539</color>
 </resources>

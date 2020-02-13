@@ -7,12 +7,16 @@ import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
+import android.widget.ListView;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.DialogFragment;
 import com.baoyz.swipemenulistview.SwipeMenu;
 import com.baoyz.swipemenulistview.SwipeMenuCreator;
 import com.baoyz.swipemenulistview.SwipeMenuItem;
 import com.baoyz.swipemenulistview.SwipeMenuListView;
+import com.haihoangtran.pm.adapters.PaymentPaidAdapter;
 import com.haihoangtran.pm.adapters.PaymentRecordsAdapter;
 import com.haihoangtran.pm.dialogs.PaymentDialog;
 import java.text.SimpleDateFormat;
@@ -48,9 +52,9 @@ public class PaymentActivity extends NavigationBaseActivity implements PaymentDi
         // Handle pay button
         this.payBtnHandle();
 
-        // Handle Payment record list view
+        // Handle 2 list vies: details and paid
         paymentDB.refreshPaymentCompleteStatus();
-        this.recordsListViewHandle();
+        this.updateListViews();
 
         //Handle bottom navigation bar
         this.navigationHandle(R.id.nav_payment);
@@ -90,7 +94,7 @@ public class PaymentActivity extends NavigationBaseActivity implements PaymentDi
 
         }
         paymentDB.refreshPaymentCompleteStatus();
-        this.recordsListViewHandle();
+        this.updateListViews();
     }
 
     private void paymentDialogHandle(int actionType, PaymentModel record, List<String> placeList){
@@ -173,11 +177,32 @@ public class PaymentActivity extends NavigationBaseActivity implements PaymentDi
                         break;
                     case 1:
                         paymentDB.deletePaymentRecord(records.get(position));
-                        recordsListViewHandle();
+                        updateListViews();
                         break;
                 }
                 return false;
             }
         });
+    }
+
+    private void paidListViewHandle(){
+        LinearLayout paidLayout = findViewById(R.id.paid_list_layout);;
+        final ArrayList<PaymentModel> records = paymentDB.getAllPaymentRecords();
+        PaymentPaidAdapter adapter = new PaymentPaidAdapter(this, 0, records);
+        //Create a list view
+        ListView reminderLv = new ListView(this);
+        reminderLv.setId(R.id.paid_list_view);
+        reminderLv.setDivider(new ColorDrawable(ContextCompat.getColor(this, R.color.transparentColor)));
+        reminderLv.setVerticalScrollBarEnabled(true);
+
+        reminderLv.setAdapter(adapter);
+        paidLayout.removeAllViews();
+        paidLayout.addView(reminderLv);
+    }
+
+    // Update 2 list vies: paid and details
+    private void updateListViews(){
+        this.paidListViewHandle();
+        this.recordsListViewHandle();
     }
 }

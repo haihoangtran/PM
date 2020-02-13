@@ -19,12 +19,12 @@ import java.util.List;
 
 import model.PaymentModel;
 
-public class HomeReminderAdapter extends ArrayAdapter<PaymentModel> {
+public class PaymentPaidAdapter extends ArrayAdapter<PaymentModel> {
 
     private Context context;
     private List<PaymentModel> records;
 
-    public HomeReminderAdapter(Context context, int resource, ArrayList<PaymentModel> records){
+    public PaymentPaidAdapter(Context context, int resource, ArrayList<PaymentModel> records){
         super(context, resource, records);
         this.context = context;
         this.records = records;
@@ -36,7 +36,7 @@ public class HomeReminderAdapter extends ArrayAdapter<PaymentModel> {
         PaymentModel record = records.get(position);
 
         LayoutInflater inflater = (LayoutInflater)context.getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
-        View view = inflater.inflate(R.layout.home_reminder_cell, null);
+        View view = inflater.inflate(R.layout.payment_paid_cell, null);
 
         // Define element in payment record cell
         TextView place = view.findViewById(R.id.place_txt);;

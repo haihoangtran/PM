@@ -2,4 +2,5 @@
 <resources>
     <item name="reminder_list_view" type="id"/>
     <item name="home_graph" type="id"/>
+    <item name="paid_list_view" type="id"/>
 </resources>

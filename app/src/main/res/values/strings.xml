@@ -50,4 +50,6 @@
     <string name="place_name">Name:</string>
     <string name="place_address">Address:</string>
     <string name="home">Home</string>
+    <string name="payment_paid_title">PAID:</string>
+    <string name="payment_details_title">DETAILS:</string>
 </resources>

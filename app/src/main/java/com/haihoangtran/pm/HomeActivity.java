@@ -1,6 +1,5 @@
 package com.haihoangtran.pm;
 
-import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
@@ -16,12 +15,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.content.Intent;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.view.Gravity;
 import android.content.pm.PackageManager;
-import com.haihoangtran.pm.adapters.HomeReminderAdapter;
 import com.haihoangtran.pm.dialogs.UserDialog;
 import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.series.DataPoint;
@@ -34,7 +31,6 @@ import java.util.Calendar;
 import java.util.Collections;
 import java.util.List;
 import controller.FileController;
-import model.PaymentModel;
 import model.UserModel;
 import controller.database.UserDB;
 import controller.database.BudgetDB;
@@ -208,9 +204,6 @@ public class HomeActivity extends AppCompatActivity implements UserDialog.OnInpu
                     case 0:
                         graphViewHandle();
                         break;
-                    case 1:
-                        reminderListViewHandle();
-                        break;
                 }
             }
 
@@ -273,22 +266,6 @@ public class HomeActivity extends AppCompatActivity implements UserDialog.OnInpu
         // add graph view to linear layout
         this.dynamicHomeLayout.removeAllViews();
         this.dynamicHomeLayout.addView(graphView);
-    }
-
-    // --------------           REMINDER VIEW       --------------
-    private void reminderListViewHandle() {
-
-        final ArrayList<PaymentModel> records = paymentDB.getAllPaymentRecords();
-        HomeReminderAdapter adapter = new HomeReminderAdapter(this, 0, records);
-        //Create a list view
-        ListView reminderLv = new ListView(this);
-        reminderLv.setId(R.id.reminder_list_view);
-        reminderLv.setDivider(new ColorDrawable(ContextCompat.getColor(this, R.color.transparentColor)));
-        reminderLv.setVerticalScrollBarEnabled(true);
-
-        reminderLv.setAdapter(adapter);
-        this.dynamicHomeLayout.removeAllViews();
-        this.dynamicHomeLayout.addView(reminderLv);
     }
 
     // --------------           BOTTOM BUTTONS        --------------
