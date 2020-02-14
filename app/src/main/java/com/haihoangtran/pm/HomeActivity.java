@@ -42,8 +42,7 @@ public class HomeActivity extends AppCompatActivity implements UserDialog.OnInpu
     private PaymentDB paymentDB;
     private FileController fileController;
     private UserModel currentUser;
-    private TabLayout homeTabLayout;
-    private LinearLayout dynamicHomeLayout;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,11 +68,8 @@ public class HomeActivity extends AppCompatActivity implements UserDialog.OnInpu
         // Handle user
         this.userHandle();
 
-        // handle Home Tab Layout
-        this.homeTabLayout = findViewById(R.id.home_tab_layout);
-        this.dynamicHomeLayout = findViewById(R.id.home_dynamic_layout);
-        this.tabHandle();
-
+        // Handle Graph view
+        this.graphViewHandle();
 
         // Handle onClick Budget Management Button
         this.budgetBtnHandle();
@@ -194,27 +190,6 @@ public class HomeActivity extends AppCompatActivity implements UserDialog.OnInpu
                 1)));
     }
 
-    // --------------           TAB BAR        --------------
-    private void tabHandle(){
-        graphViewHandle();
-        this.homeTabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
-            @Override
-            public void onTabSelected(TabLayout.Tab tab) {
-                switch(tab.getPosition()){
-                    case 0:
-                        graphViewHandle();
-                        break;
-                }
-            }
-
-            @Override
-            public void onTabUnselected(TabLayout.Tab tab) {}
-
-            @Override
-            public void onTabReselected(TabLayout.Tab tab) {}
-        });
-    }
-
     // --------------           GRAPH VIEW        --------------
     private void graphViewHandle(){
         String[] monthList = getResources().getStringArray(R.array.month_dropdown_items);
@@ -264,8 +239,9 @@ public class HomeActivity extends AppCompatActivity implements UserDialog.OnInpu
 
 
         // add graph view to linear layout
-        this.dynamicHomeLayout.removeAllViews();
-        this.dynamicHomeLayout.addView(graphView);
+        LinearLayout dynamicHomeLayout = findViewById(R.id.home_dynamic_layout);
+        dynamicHomeLayout.removeAllViews();
+        dynamicHomeLayout.addView(graphView);
     }
 
     // --------------           BOTTOM BUTTONS        --------------

@@ -4,7 +4,6 @@
     <string name="app_permission_denied">Permission is dennied to read your External Storage</string>
     <string name="welcome_personal_management">Welcome to\n Personal Management</string>
     <string name="reminder_tab">Reminder</string>
-    <string name="graph_tab">Graph</string>
     <string name="budget_button">Budget</string>
     <string name="payment_button">Payment</string>
     <string name="place_button">Place</string>

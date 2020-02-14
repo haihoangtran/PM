@@ -10,7 +10,6 @@
     <color name="budgetWithdrawTxt">#FF0000</color>
     <color name="bugetDepositTxt">#00A000</color>
     <color name="homeReminderBorderLine">#FFFFFF</color>
-    <color name="selectedTabColor">#9DF539</color>
     <color name="customBorderLine">#FFFFFF</color>
     <color name="viewDataCellBorder">#838383</color>
     <color name="bottomNavColor">#AAAAAA</color>
