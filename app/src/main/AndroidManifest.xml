@@ -11,18 +11,23 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".PlaceActivity"
-            android:label="@string/title_activity_place"
+            android:name=".NoteActivity"
+            android:label="@string/title_activity_note"
             android:parentActivityName=".HomeActivity"
             android:theme="@style/AppTheme.NoActionBar"/>
         <activity
+            android:name=".PlaceActivity"
+            android:label="@string/title_activity_place"
+            android:parentActivityName=".HomeActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
             android:name=".PaymentActivity"
-            android:label="@string/payment_title"
+            android:label="@string/title_activity_payment"
             android:parentActivityName=".HomeActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".BudgetActivity"
-            android:label="@string/budget_title"
+            android:label="@string/title_activity_budget"
             android:parentActivityName=".HomeActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity

@@ -9,6 +9,7 @@ import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
 import androidx.fragment.app.DialogFragment;
 import android.Manifest;
+import android.provider.ContactsContract;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -77,8 +78,11 @@ public class HomeActivity extends AppCompatActivity implements UserDialog.OnInpu
         // Handle onClick Payment Button
         this.paymentBtnHandle();
 
-        // Jandle onClick Place Button
+        // Handle onClick Place Button
         this.placeBtnHandle();
+
+        //Handle onClick Note Button
+        this.noteBtnHandle();
 
     }
 
@@ -263,8 +267,8 @@ public class HomeActivity extends AppCompatActivity implements UserDialog.OnInpu
         paymentBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent budgetIntent = new Intent(HomeActivity.this, PaymentActivity.class);
-                startActivity(budgetIntent);
+                Intent paymentIntent = new Intent(HomeActivity.this, PaymentActivity.class);
+                startActivity(paymentIntent);
             }
         });
     }
@@ -275,8 +279,20 @@ public class HomeActivity extends AppCompatActivity implements UserDialog.OnInpu
         placeBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent budgetIntent = new Intent(HomeActivity.this, PlaceActivity.class);
-                startActivity(budgetIntent);
+                Intent placeIntent = new Intent(HomeActivity.this, PlaceActivity.class);
+                startActivity(placeIntent);
+            }
+        });
+    }
+
+    //Handle on click note button
+    private void noteBtnHandle(){
+        LinearLayout noteBtn = findViewById(R.id.note_btn);
+        noteBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent noteIntent = new Intent(HomeActivity.this, NoteActivity.class);
+                startActivity(noteIntent);
             }
         });
     }

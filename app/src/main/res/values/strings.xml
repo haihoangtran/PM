@@ -7,8 +7,8 @@
     <string name="budget_button">Budget</string>
     <string name="payment_button">Payment</string>
     <string name="place_button">Place</string>
-    <string name="title_activity_budget">BudgetActivity</string>
-    <string name="budget_title">Budget Management</string>
+    <string name="note_button">Note</string>
+    <string name="title_activity_budget">Budget Management</string>
     <string name="all_budget_tab">All</string>
     <string name="deposit">Deposit</string>
     <string name="withdraw">Withdraw</string>
@@ -30,7 +30,7 @@
         <item>11</item>
         <item>12</item>
     </string-array>
-    <string name="payment_title">Payment</string>
+    <string name="title_activity_payment">Payment</string>
     <string name="default_amount_cb">Default Amount</string>
     <string name="custom_amount_cb">Custom Amount</string>
     <string name="new_payment">New Payment...</string>
@@ -51,4 +51,7 @@
     <string name="home">Home</string>
     <string name="payment_paid_title">PAID:</string>
     <string name="payment_details_title">DETAILS:</string>
+    <string name="note_title">Title:</string>
+    <string name="note_content">Content:</string>
+    <string name="title_activity_note">Note</string>
 </resources>

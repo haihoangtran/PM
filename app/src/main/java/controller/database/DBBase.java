@@ -52,6 +52,8 @@ public class DBBase extends SQLiteOpenHelper {
         createBudgetTable(db);
         createPaymentTable(db);
         createPlaceTable(db);
+        createNoteTitleTable(db);
+        createNoteDetailTable(db);
     }
 
     private void createUserTable(SQLiteDatabase db){
@@ -87,6 +89,24 @@ public class DBBase extends SQLiteOpenHelper {
          */
         String sql = "Create table if not exists Place (placeID integer primary key AUTOINCREMENT, " +
                 "placeName text not null, placeAddr text not null)";
+        db.execSQL(sql);
+    }
+
+    private void createNoteTitleTable(SQLiteDatabase db){
+        /*
+        field: titleID, titleName
+         */
+        String sql = "Create table if not exists NoteTitle (titleID integer primary key AUTOINCREMENT, " +
+                "titleName text not null)";
+        db.execSQL(sql);
+    }
+
+    private void createNoteDetailTable(SQLiteDatabase db){
+        /*
+        field: detailID, content, titleID
+         */
+        String sql = "Create table if not exists NoteDetail (detailID integer primary key AUTOINCREMENT, " +
+                "content text not null, titleID integer, foreign key (titleID) references NoteTitle('titleID'))";
         db.execSQL(sql);
     }
 }
