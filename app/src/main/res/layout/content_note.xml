@@ -10,4 +10,58 @@
     tools:context=".NoteActivity"
     tools:showIn="@layout/activity_note">
 
+    <TextView
+        android:id="@+id/note_title_subtile_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="20dp"
+        android:text="@string/note_title"
+        android:textColor="@color/noteSubTitleColor"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+    <com.baoyz.swipemenulistview.SwipeMenuListView
+        android:id="@+id/note_title_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="5dp"
+        android:layout_weight="3"
+        android:background="@color/transparentColor"
+        android:divider="@color/viewDataCellBorder"
+        android:dividerHeight="1dp"
+        android:listSelector="@android:color/darker_gray"
+        android:paddingStart="5dp"
+        android:paddingEnd="5dp">
+
+    </com.baoyz.swipemenulistview.SwipeMenuListView>
+
+    <TextView
+        android:id="@+id/note_content_subtitle_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:text="@string/note_content"
+        android:textColor="@color/noteSubTitleColor"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/content_text_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="15dp"
+        android:layout_marginBottom="5dp"
+        android:layout_weight="2"
+        android:maxLines="50"
+        android:scrollbars="vertical"
+        android:singleLine="false"
+        android:textColor="@color/textColor"
+        android:textSize="14sp" />
+
 </LinearLayout>
