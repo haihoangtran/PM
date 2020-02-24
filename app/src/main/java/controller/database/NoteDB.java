@@ -1,10 +1,14 @@
 package controller.database;
 
+import android.content.ContentValues;
 import android.content.Context;
+import android.database.sqlite.SQLiteDatabase;
+
+import model.NoteModel;
 
 public class NoteDB extends DBBase {
-    // table: User
-    // field: full_name, balance
+    // table: Note
+    // field: noteID, title, content
 
     private static NoteDB sInstance;
 
@@ -20,11 +24,28 @@ public class NoteDB extends DBBase {
     }
 
 
-    public void addNoteTitle(String titleName){
-
+    public void addNote(NoteModel note){
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.beginTransaction();
+        try{
+            ContentValues values = new ContentValues();
+            values.put("title", note.getTitle());
+            values.put("content", note.getContent());
+            db.insert("Note", null, values);
+            db.setTransactionSuccessful();
+            db.endTransaction();
+            db.close();
+        }catch(Exception e){
+            e.printStackTrace();
+        }finally {
+            if (db.isOpen()){
+                db.endTransaction();
+                db.close();
+            }
+        }
     }
 
-    public void editNoteTitle(int titleID, String newTitleName){
+    public void updateNote(NoteModel newNote, int oldNoteID){
 
     }
 }
