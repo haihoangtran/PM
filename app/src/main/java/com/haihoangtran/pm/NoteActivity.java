@@ -1,23 +1,35 @@
 package com.haihoangtran.pm;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.TextView;
 
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.DialogFragment;
 
+import com.baoyz.swipemenulistview.SwipeMenu;
+import com.baoyz.swipemenulistview.SwipeMenuCreator;
+import com.baoyz.swipemenulistview.SwipeMenuItem;
+import com.baoyz.swipemenulistview.SwipeMenuListView;
+import com.haihoangtran.pm.adapters.NoteRecordsAdapter;
 import com.haihoangtran.pm.dialogs.NoteDialog;
+
+import java.util.ArrayList;
 
 import controller.database.NoteDB;
 import model.NoteModel;
 
 public class NoteActivity extends AppCompatActivity implements NoteDialog.OnInputListener {
     private NoteDB noteDb;
+    private int currentNoteID = -1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +43,10 @@ public class NoteActivity extends AppCompatActivity implements NoteDialog.OnInpu
 
         // Handle onClick of Add button
         this.addBtnHandle();
+
+        // Handle Title List View and Content
+        this.titleListViewHandle();
+        this.contentHandle("");
     }
 
     @Override
@@ -63,7 +79,8 @@ public class NoteActivity extends AppCompatActivity implements NoteDialog.OnInpu
         }
 
         // Display current address and refresh list view
-//        this.recordsListViewHandle();
+        this.titleListViewHandle();
+        this.contentHandle(newNote.getContent());
     }
 
     private void noteDialogHandle(int actionType, NoteModel note){
@@ -84,5 +101,71 @@ public class NoteActivity extends AppCompatActivity implements NoteDialog.OnInpu
 
             }
         });
+    }
+
+    // --------------           LIST AND TEXT VIEWS        --------------
+
+    private void titleListViewHandle(){
+        final ArrayList<NoteModel> noteRecords = noteDb.getAllNotes();
+
+        // Create and Add DataApdater to list view
+        SwipeMenuListView recordListView = findViewById(R.id.note_title_list);
+        NoteRecordsAdapter recordDataAdapter = new NoteRecordsAdapter(this, 0, noteRecords);
+        recordListView.setAdapter(recordDataAdapter);
+
+        SwipeMenuCreator creator = new SwipeMenuCreator() {
+            @Override
+            public void create(SwipeMenu menu) {
+                // Create Edit button
+                SwipeMenuItem editItem = new SwipeMenuItem(getApplicationContext());
+                editItem.setBackground(new ColorDrawable(Color.rgb(0x30, 0xB1, 0xF5)));
+                editItem.setWidth(180);
+                editItem.setTitle(R.string.edit);
+                editItem.setTitleSize(15);
+                editItem.setTitleColor(Color.WHITE);
+                menu.addMenuItem(editItem);
+
+                // create "delete" item
+                SwipeMenuItem deleteItem = new SwipeMenuItem(getApplicationContext());
+                deleteItem.setBackground(new ColorDrawable(Color.rgb(0xF9,0x3F, 0x25)));
+                deleteItem.setWidth(180);
+                deleteItem.setIcon(R.drawable.ic_delete);
+                menu.addMenuItem(deleteItem);
+            }
+
+        };
+
+        // Add menu item and handle action on menu items
+        recordListView.setMenuCreator(creator);
+        recordListView.setOnMenuItemClickListener(new SwipeMenuListView.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(int position, SwipeMenu menu, int index) {
+                // position is location of records list (0:), index is location of 2 buttons.
+                switch (index){
+                    case 0:
+                        noteDialogHandle(2, noteRecords.get(position));
+                        break;
+                    case 1:
+                        noteDb.deleteNote(noteRecords.get(position).getNoteId());
+                        titleListViewHandle();
+                        contentHandle("");
+                        break;
+                }
+                return false;
+            }
+        });
+
+        // Add click action on an item
+        recordListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                contentHandle(noteRecords.get(position).getContent());
+            }
+        });
+    }
+
+    private void contentHandle(String content){
+        TextView contentText = findViewById(R.id.content_text_view);
+        contentText.setText(content);
     }
 }
