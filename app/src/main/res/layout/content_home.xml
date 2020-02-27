@@ -242,7 +242,7 @@
                         android:id="@+id/note_btn_img"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        app:srcCompat="@drawable/place_button" />
+                        app:srcCompat="@drawable/note_button" />
 
                     <TextView
                         android:id="@+id/note_btn_text"
