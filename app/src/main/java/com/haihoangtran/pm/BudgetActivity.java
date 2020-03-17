@@ -26,6 +26,7 @@ import com.baoyz.swipemenulistview.SwipeMenuItem;
 import com.baoyz.swipemenulistview.SwipeMenuListView;
 import com.haihoangtran.pm.adapters.BudgetRecordsAdapter;
 import com.haihoangtran.pm.dialogs.BudgetAddEditDialog;
+import com.haihoangtran.pm.dialogs.BudgetYearlyDeleteDialog;
 
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.Color;
@@ -56,8 +57,11 @@ public class BudgetActivity extends NavigationBaseActivity implements BudgetAddE
         // Define variables
         budgetDB = budgetDB.getInstance(BudgetActivity.this);
 
-        //Handle Add icon button
+        //Handle Add icon button on navigation
         this.addBtnHandle();
+
+        // Handle Yearly Delete icon button on navigation
+        this.yearlyDeleteBtnHandle();
 
         // Handle month dropdown
         this.monthDropdownHandle();
@@ -100,6 +104,7 @@ public class BudgetActivity extends NavigationBaseActivity implements BudgetAddE
     public void sendRecord(int actionType, BudgetModel newRecord, BudgetModel oldRecord){
         if (actionType == 1){
             budgetDB.addBudgetRecord(newRecord);
+            this.yearDropdownHandle();
         }else{
             budgetDB.updateRecord(newRecord, oldRecord);
         }
@@ -122,6 +127,19 @@ public class BudgetActivity extends NavigationBaseActivity implements BudgetAddE
         BudgetAddEditDialog budgetAddEditDialog = new BudgetAddEditDialog(actionType, record);
         budgetAddEditDialog.setStyle(DialogFragment.STYLE_NORMAL, R.style.Theme_AppCompat_Light_Dialog_MinWidth);
         budgetAddEditDialog.show(getSupportFragmentManager(), "BudgetAddEditDialog");
+    }
+
+    // Handle Yearly Delete button
+    private void yearlyDeleteBtnHandle(){
+        Button yearlyDeleteBtn = findViewById(R.id.budget_yearly_delete_nav_btn);
+        yearlyDeleteBtn.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                BudgetYearlyDeleteDialog deleteDialog = new BudgetYearlyDeleteDialog(BudgetActivity.this);
+                deleteDialog.setStyle(DialogFragment.STYLE_NORMAL, R.style.Theme_AppCompat_Light_Dialog_MinWidth);
+                deleteDialog.show(getSupportFragmentManager(), "BudgetYearlyDeleteDialog");
+            }
+        });
     }
 
     // --------------           DROPDOWN BUTTONS and TOTAL Text        --------------

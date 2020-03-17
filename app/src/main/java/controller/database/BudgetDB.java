@@ -159,6 +159,12 @@ public class BudgetDB extends DBBase {
         }
     }
 
+    public void deleteRecordsByYear(String year){
+        SQLiteDatabase db = this.getWritableDatabase();
+        int rows = db.delete("Budget", "year = " + year, null);
+        db.close();
+    }
+
     public void updateRecord(BudgetModel newRecord, BudgetModel oldRecord){
         //delete old
         this.deleteRecord(oldRecord);
