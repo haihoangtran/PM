@@ -107,9 +107,10 @@ public class BudgetActivity extends NavigationBaseActivity implements BudgetAddE
             this.yearDropdownHandle();
         }else{
             budgetDB.updateRecord(newRecord, oldRecord);
+            this.displayBudgetRecords();
         }
-        this.displayBudgetRecords();
     }
+
     //Handle onClick Add icon button
     private void addBtnHandle(){
         Button addBtn = findViewById(R.id.budget_add_nav_btn);
@@ -286,7 +287,4 @@ public class BudgetActivity extends NavigationBaseActivity implements BudgetAddE
         }
         this.recordsListViewHandle();
     }
-
-
-
 }
