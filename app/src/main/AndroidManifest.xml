@@ -11,10 +11,15 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+            android:name=".VocabularyActivity"
+            android:label="@string/title_activity_vocabulary"
+            android:parentActivityName=".HomeActivity"
+            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity
             android:name=".NoteActivity"
             android:label="@string/title_activity_note"
             android:parentActivityName=".HomeActivity"
-            android:theme="@style/AppTheme.NoActionBar"/>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".PlaceActivity"
             android:label="@string/title_activity_place"

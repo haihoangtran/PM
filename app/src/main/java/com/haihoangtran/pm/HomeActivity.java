@@ -9,7 +9,6 @@ import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
 import androidx.fragment.app.DialogFragment;
 import android.Manifest;
-import android.provider.ContactsContract;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -24,7 +23,6 @@ import com.haihoangtran.pm.dialogs.UserDialog;
 import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.series.DataPoint;
 import com.jjoe64.graphview.series.LineGraphSeries;
-import com.google.android.material.tabs.TabLayout;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
@@ -83,6 +81,9 @@ public class HomeActivity extends AppCompatActivity implements UserDialog.OnInpu
 
         //Handle onClick Note Button
         this.noteBtnHandle();
+
+        // Handle onCLick Vocabulary Button
+        this.vocabularyBtnHandle();
 
     }
 
@@ -293,6 +294,18 @@ public class HomeActivity extends AppCompatActivity implements UserDialog.OnInpu
             public void onClick(View v) {
                 Intent noteIntent = new Intent(HomeActivity.this, NoteActivity.class);
                 startActivity(noteIntent);
+            }
+        });
+    }
+
+    // Handle onClick Vocabulary button
+    private void vocabularyBtnHandle(){
+        LinearLayout vocabularyBtn = findViewById(R.id.vocabulary_btn);
+        vocabularyBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent vocabularyIntent = new Intent(HomeActivity.this, VocabularyActivity.class);
+                startActivity(vocabularyIntent);
             }
         });
     }

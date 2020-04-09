@@ -8,6 +8,7 @@
     <string name="payment_button">Payment</string>
     <string name="place_button">Place</string>
     <string name="note_button">Note</string>
+    <string name="vocabulary_button">Vocabulary</string>
     <string name="title_activity_budget">Budget Management</string>
     <string name="all_budget_tab">All</string>
     <string name="deposit">Deposit</string>
@@ -56,4 +57,5 @@
     <string name="title_activity_note">Note</string>
     <string name="delete">Delete</string>
     <string name="budget_delete_by_year_title"> Delete By Year</string>
+    <string name="title_activity_vocabulary">Vocabulary</string>
 </resources>
