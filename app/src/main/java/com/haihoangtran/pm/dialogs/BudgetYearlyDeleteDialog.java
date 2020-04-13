@@ -12,7 +12,7 @@ import android.widget.Spinner;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
-import com.haihoangtran.pm.BudgetActivity;
+import com.haihoangtran.pm.activities.BudgetActivity;
 import com.haihoangtran.pm.R;
 import java.util.ArrayList;
 import java.util.Calendar;

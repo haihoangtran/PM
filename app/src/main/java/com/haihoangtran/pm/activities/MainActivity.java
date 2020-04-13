@@ -1,9 +1,11 @@
-package com.haihoangtran.pm;
+package com.haihoangtran.pm.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Handler;
+
+import com.haihoangtran.pm.R;
 
 public class MainActivity extends AppCompatActivity {
     private static int SPLASH_TIMEOUT = 2000;

@@ -1,9 +1,10 @@
-package com.haihoangtran.pm;
+package com.haihoangtran.pm.activities;
 
 import android.os.Bundle;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
+import com.haihoangtran.pm.R;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;

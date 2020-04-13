@@ -1,47 +1,53 @@
-package com.haihoangtran.pm;
+package com.haihoangtran.pm.activities;
 
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
-import android.net.Uri;
 import android.os.Bundle;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.fragment.app.DialogFragment;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.TextView;
+
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.DialogFragment;
+
 import com.baoyz.swipemenulistview.SwipeMenu;
 import com.baoyz.swipemenulistview.SwipeMenuCreator;
 import com.baoyz.swipemenulistview.SwipeMenuItem;
 import com.baoyz.swipemenulistview.SwipeMenuListView;
-import com.haihoangtran.pm.adapters.PlaceRecordsAdapter;
-import com.haihoangtran.pm.dialogs.PlaceDialog;
-import java.util.ArrayList;
-import model.PlaceModel;
-import  controller.database.PlaceDB;
+import com.haihoangtran.pm.R;
+import com.haihoangtran.pm.adapters.NoteRecordsAdapter;
+import com.haihoangtran.pm.dialogs.NoteDialog;
 
-public class PlaceActivity extends AppCompatActivity implements PlaceDialog.OnInputListener {
-    private PlaceDB placeDB;
-    private SwipeMenuListView recordListView;
+import java.util.ArrayList;
+
+import controller.database.NoteDB;
+import model.NoteModel;
+
+public class NoteActivity extends AppCompatActivity implements NoteDialog.OnInputListener {
+    private NoteDB noteDb;
+    private int currentNoteID = -1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_place);
+        setContentView(R.layout.activity_note);
         Toolbar toolbar = findViewById(R.id.title);
         setSupportActionBar(toolbar);
 
+        // initial Note DB
+        noteDb = NoteDB.getInstance(NoteActivity.this);
 
-        // Define variables
-        placeDB = PlaceDB.getInstance(PlaceActivity.this);
-
-        // Handle Add Btn
+        // Handle onClick of Add button
         this.addBtnHandle();
 
-        // Handle Place list view
-        this.recordsListViewHandle();
+        // Handle Title List View and Content
+        this.titleListViewHandle();
+        this.contentHandle("");
     }
 
     @Override
@@ -49,62 +55,63 @@ public class PlaceActivity extends AppCompatActivity implements PlaceDialog.OnIn
         switch (keyCode){
             case KeyEvent.KEYCODE_BACK:
                 finish();
-                Intent intent = new Intent(PlaceActivity.this, HomeActivity.class);
+                Intent intent = new Intent(NoteActivity.this, HomeActivity.class);
                 startActivity(intent);
                 return true;
         }
         return super.onKeyDown(keyCode, event);
     }
 
-     /* ******************************************************
+    /* ******************************************************
                PRIVATE FUNCTIONS
     *********************************************************/
-     // --------------           Place DIALOG        ----------
-     // Implement SendRecord interface
-     // action type: 1 - Add , 2 - Edit
-     @Override
-     public void sendRecord(int actionType, PlaceModel newPlace, PlaceModel oldPlace){
-         switch (actionType) {
-             case 1:
-                 placeDB.addPlace(newPlace);
-                 break;
-             case 2:
-                 placeDB.updatePlace(newPlace, oldPlace.getPlaceID());
-                 break;
-         }
+    // --------------           Note DIALOG        ----------
+    // Implement SendRecord interface
+    // action type: 1 - Add , 2 - Edit
+    @Override
+    public void sendRecord(int actionType, NoteModel newNote, NoteModel oldNote){
+        switch (actionType) {
+            case 1:
+                noteDb.addNote(newNote);
+                break;
+            case 2:
+                noteDb.updateNote(newNote, oldNote.getNoteId());
+                break;
+        }
 
-         // Display current address and refresh list view
-         this.recordsListViewHandle();
-     }
+        // Display current address and refresh list view
+        this.titleListViewHandle();
+        this.contentHandle(newNote.getContent());
+    }
 
-    private void placeDialogHandle(int actionType, PlaceModel place){
-        PlaceDialog placeDialog = new PlaceDialog(actionType, place);
-        placeDialog.setStyle(DialogFragment.STYLE_NORMAL, R.style.Theme_AppCompat_Light_Dialog_MinWidth);
-        placeDialog.show(getSupportFragmentManager(), "PlaceDialog");
+    private void noteDialogHandle(int actionType, NoteModel note){
+        NoteDialog noteDialog = new NoteDialog(actionType, note);
+        noteDialog.setStyle(DialogFragment.STYLE_NORMAL, R.style.Theme_AppCompat_Light_Dialog_MinWidth);
+        noteDialog.show(getSupportFragmentManager(), "NoteDialog");
     }
 
     // --------------           TOP NAVIGATION        --------------
 
     private void addBtnHandle(){
-        Button addBtn = findViewById(R.id.place_add_nav_btn);
+        Button addBtn = findViewById(R.id.note_add_nav_btn);
         addBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                PlaceModel initialRecord = new PlaceModel(-1, "", "");
-                placeDialogHandle(1, initialRecord);
+                NoteModel initialNote = new NoteModel(-1, "", "");
+                noteDialogHandle(1, initialNote);
 
             }
         });
     }
 
-    // --------------          Place List View     --------------
-    private void recordsListViewHandle(){
+    // --------------           LIST AND TEXT VIEWS        --------------
 
-        final ArrayList<PlaceModel> placeRecords = placeDB.getAllPlaces();
+    private void titleListViewHandle(){
+        final ArrayList<NoteModel> noteRecords = noteDb.getAllNotes();
 
         // Create and Add DataApdater to list view
-        recordListView = findViewById(R.id.place_records_view);
-        PlaceRecordsAdapter recordDataAdapter = new PlaceRecordsAdapter(this, 0, placeRecords);
+        SwipeMenuListView recordListView = findViewById(R.id.note_title_list);
+        NoteRecordsAdapter recordDataAdapter = new NoteRecordsAdapter(this, 0, noteRecords);
         recordListView.setAdapter(recordDataAdapter);
 
         SwipeMenuCreator creator = new SwipeMenuCreator() {
@@ -113,16 +120,16 @@ public class PlaceActivity extends AppCompatActivity implements PlaceDialog.OnIn
                 // Create Edit button
                 SwipeMenuItem editItem = new SwipeMenuItem(getApplicationContext());
                 editItem.setBackground(new ColorDrawable(Color.rgb(0x30, 0xB1, 0xF5)));
-                editItem.setWidth(170);
+                editItem.setWidth(180);
                 editItem.setTitle(R.string.edit);
-                editItem.setTitleSize(18);
+                editItem.setTitleSize(15);
                 editItem.setTitleColor(Color.WHITE);
                 menu.addMenuItem(editItem);
 
                 // create "delete" item
                 SwipeMenuItem deleteItem = new SwipeMenuItem(getApplicationContext());
                 deleteItem.setBackground(new ColorDrawable(Color.rgb(0xF9,0x3F, 0x25)));
-                deleteItem.setWidth(170);
+                deleteItem.setWidth(180);
                 deleteItem.setIcon(R.drawable.ic_delete);
                 menu.addMenuItem(deleteItem);
             }
@@ -137,11 +144,12 @@ public class PlaceActivity extends AppCompatActivity implements PlaceDialog.OnIn
                 // position is location of records list (0:), index is location of 2 buttons.
                 switch (index){
                     case 0:
-                        placeDialogHandle(2, placeRecords.get(position));
+                        noteDialogHandle(2, noteRecords.get(position));
                         break;
                     case 1:
-                        placeDB.deletePlace(placeRecords.get(position).getPlaceID());
-                        recordsListViewHandle();
+                        noteDb.deleteNote(noteRecords.get(position).getNoteId());
+                        titleListViewHandle();
+                        contentHandle("");
                         break;
                 }
                 return false;
@@ -152,14 +160,13 @@ public class PlaceActivity extends AppCompatActivity implements PlaceDialog.OnIn
         recordListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                // Open google map app after clicking on item
-                String selectedAddr = placeRecords.get(position).getAddress();
-                Uri adrUri = Uri.parse("geo:0,0?q= " + selectedAddr);
-                Intent mapIntent = new Intent(Intent.ACTION_VIEW, adrUri);
-                mapIntent.setPackage("com.google.android.apps.maps");
-                startActivity(mapIntent);
+                contentHandle(noteRecords.get(position).getContent());
             }
         });
+    }
 
+    private void contentHandle(String content){
+        TextView contentText = findViewById(R.id.content_text_view);
+        contentText.setText(content);
     }
 }

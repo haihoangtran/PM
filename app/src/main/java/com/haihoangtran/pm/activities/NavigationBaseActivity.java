@@ -1,4 +1,4 @@
-package com.haihoangtran.pm;
+package com.haihoangtran.pm.activities;
 
 import android.content.Intent;
 import android.view.MenuItem;
@@ -7,6 +7,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.haihoangtran.pm.R;
 
 public class NavigationBaseActivity extends AppCompatActivity {
     public void navigationHandle(int id){

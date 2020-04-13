@@ -1,4 +1,4 @@
-package com.haihoangtran.pm;
+package com.haihoangtran.pm.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -24,6 +24,7 @@ import com.baoyz.swipemenulistview.SwipeMenu;
 import com.baoyz.swipemenulistview.SwipeMenuCreator;
 import com.baoyz.swipemenulistview.SwipeMenuItem;
 import com.baoyz.swipemenulistview.SwipeMenuListView;
+import com.haihoangtran.pm.R;
 import com.haihoangtran.pm.adapters.BudgetRecordsAdapter;
 import com.haihoangtran.pm.dialogs.BudgetAddEditDialog;
 import com.haihoangtran.pm.dialogs.BudgetYearlyDeleteDialog;

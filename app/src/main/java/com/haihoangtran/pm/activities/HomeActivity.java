@@ -1,4 +1,4 @@
-package com.haihoangtran.pm;
+package com.haihoangtran.pm.activities;
 
 import android.net.Uri;
 import android.os.Bundle;
@@ -19,6 +19,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.view.Gravity;
 import android.content.pm.PackageManager;
+
+import com.haihoangtran.pm.R;
 import com.haihoangtran.pm.dialogs.UserDialog;
 import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.series.DataPoint;
