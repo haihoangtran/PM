@@ -302,12 +302,12 @@ public class HomeActivity extends AppCompatActivity implements UserDialog.OnInpu
 
     // Handle onClick Vocabulary button
     private void vocabularyBtnHandle(){
-        LinearLayout vocabularyBtn = findViewById(R.id.vocabulary_btn);
-        vocabularyBtn.setOnClickListener(new View.OnClickListener() {
+        LinearLayout wordsBtn = findViewById(R.id.words_btn);
+        wordsBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent vocabularyIntent = new Intent(HomeActivity.this, VocabularyActivity.class);
-                startActivity(vocabularyIntent);
+                Intent wordsIntent = new Intent(HomeActivity.this, WordsActivity.class);
+                startActivity(wordsIntent);
             }
         });
     }
