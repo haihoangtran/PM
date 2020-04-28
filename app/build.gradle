@@ -25,7 +25,7 @@ android {
                            'src/main/res/layouts/payment',
                            'src/main/res/layouts/note',
                            'src/main/res/layouts/vocabulary',
-                           'src/main/res/layouts/place', 'src/main/res/layouts/common', 'src/main/res/layouts/words']
+                           'src/main/res/layouts/place', 'src/main/res/layouts/common', 'src/main/res/layouts/words', 'src/main/res/layouts/dictionary']
             }
         }
     }

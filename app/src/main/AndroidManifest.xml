@@ -11,8 +11,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".activities.WordsActivity"
-            android:label="@string/title_activity_words"
+            android:name=".activities.DictionaryActivity"
+            android:label="@string/title_activity_dictionary"
             android:parentActivityName=".activities.HomeActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity

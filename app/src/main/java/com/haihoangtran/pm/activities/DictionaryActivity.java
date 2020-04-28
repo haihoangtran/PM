@@ -11,12 +11,12 @@ import androidx.appcompat.widget.Toolbar;
 
 import android.view.View;
 
-public class WordsActivity extends AppCompatActivity {
+public class DictionaryActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_words);
+        setContentView(R.layout.activity_dictionary);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 

@@ -272,25 +272,25 @@
                 android:orientation="vertical">
 
                 <LinearLayout
-                    android:id="@+id/words_btn"
+                    android:id="@+id/dictionary_btn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:clickable="true"
                     android:orientation="vertical">
 
                     <ImageView
-                        android:id="@+id/words_btn_img"
+                        android:id="@+id/dictionary_btn_img"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         app:srcCompat="@drawable/place_button" />
 
                     <TextView
-                        android:id="@+id/words_btn_text"
+                        android:id="@+id/dictionary_btn_text"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:fontFamily="sans-serif-black"
-                        android:text="@string/words_button"
+                        android:text="@string/dictionary_button"
                         android:textColor="@color/textColor"
                         android:textSize="15sp"
                         android:textStyle="bold" />
