@@ -282,7 +282,7 @@
                         android:id="@+id/dictionary_btn_img"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        app:srcCompat="@drawable/place_button" />
+                        app:srcCompat="@drawable/dictionary_button" />
 
                     <TextView
                         android:id="@+id/dictionary_btn_text"
