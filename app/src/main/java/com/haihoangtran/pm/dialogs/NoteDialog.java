@@ -68,7 +68,7 @@ public class NoteDialog extends DialogFragment {
                PRIVATE FUNCTIONS
     *********************************************************/
     // onClick Cancel button
-    public void cancelBtnHandle(){
+    private void cancelBtnHandle(){
         cancelBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -78,7 +78,7 @@ public class NoteDialog extends DialogFragment {
     }
 
     // onClick Confirm button
-    public void confirmBtnHandle(){
+    private void confirmBtnHandle(){
         confirmBtn.setText((this.actionType == 1 ? getString(R.string.add).toUpperCase() : getString(R.string.edit).toUpperCase()));
         confirmBtn.setOnClickListener(new View.OnClickListener() {
             @Override

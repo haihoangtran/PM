@@ -30,7 +30,6 @@ import model.NoteModel;
 
 public class NoteActivity extends AppCompatActivity implements NoteDialog.OnInputListener {
     private NoteDB noteDb;
-    private int currentNoteID = -1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
