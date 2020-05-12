@@ -58,5 +58,7 @@
     <string name="delete">Delete</string>
     <string name="budget_delete_by_year_title"> Delete By Year</string>
     <string name="title_activity_dictionary">New Words</string>
-
+    <string name="existed_word_error_dialog_title">Existed Word!</string>
+    <string name="existed_word_error_dialog_message">The \'%s\' is existed. Please, try to add another word </string>
+    <string name="ok">OK</string>
 </resources>

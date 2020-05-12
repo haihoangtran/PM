@@ -4,17 +4,18 @@ import android.content.Intent;
 import android.os.Bundle;
 import com.haihoangtran.pm.R;
 import com.haihoangtran.pm.dialogs.DictionaryDialog;
+import com.haihoangtran.pm.dialogs.DictionaryExistedWordErrorDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.DialogFragment;
-
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
-
+import controller.database.DictionaryDB;
 import model.DictionaryModel;
 
 public class DictionaryActivity extends AppCompatActivity implements DictionaryDialog.OnInputListener {
+    private DictionaryDB dictionaryDb;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,6 +23,9 @@ public class DictionaryActivity extends AppCompatActivity implements DictionaryD
         setContentView(R.layout.activity_dictionary);
         Toolbar toolbar = findViewById(R.id.dictionary_title);
         setSupportActionBar(toolbar);
+
+        // Initialize dictionary db
+        dictionaryDb = DictionaryDB.getInstance(DictionaryActivity.this);
 
         // Handle dictionary dialog
         this.addBtnHandle();
@@ -49,8 +53,12 @@ public class DictionaryActivity extends AppCompatActivity implements DictionaryD
     public void sendRecord(int actionType, DictionaryModel newDict, DictionaryModel oldDict){
         switch (actionType){
             case 1:
-                // add new word to DB
-                System.out.println("Add new data");
+                if (!this.dictionaryDb.addWord(newDict)){
+                    System.out.println("Execute here");
+                    DictionaryExistedWordErrorDialog errorDialog = new DictionaryExistedWordErrorDialog(newDict);
+                    errorDialog.setStyle(DialogFragment.STYLE_NORMAL, R.style.Theme_AppCompat_Light_Dialog_MinWidth);
+                    errorDialog.show(getSupportFragmentManager(), "DictionaryExistedWordErrorDialog");
+                };
                 break;
             case 2:
                 // edit word
@@ -71,7 +79,7 @@ public class DictionaryActivity extends AppCompatActivity implements DictionaryD
         addBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                DictionaryModel initialDict = new DictionaryModel(-1, "");
+                DictionaryModel initialDict = new DictionaryModel("");
                 dictionaryDialogHandle(1, initialDict);
 
             }

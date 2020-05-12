@@ -53,6 +53,7 @@ public class DBBase extends SQLiteOpenHelper {
         createPaymentTable(db);
         createPlaceTable(db);
         createNoteTable(db);
+        createDictionaryTable(db);
     }
 
     private void createUserTable(SQLiteDatabase db){
@@ -97,6 +98,14 @@ public class DBBase extends SQLiteOpenHelper {
          */
         String sql = "Create table if not exists Note (noteID integer primary key AUTOINCREMENT, " +
                 "title text not null, content text not null)";
+        db.execSQL(sql);
+    }
+
+    private void createDictionaryTable(SQLiteDatabase db){
+        /*
+        field: word
+         */
+        String sql = "Create table if not exists Dictionary (word text primary key)";
         db.execSQL(sql);
     }
 }

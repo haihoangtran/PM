@@ -80,7 +80,7 @@ public class DictionaryDialog extends DialogFragment {
             if (newWord.matches("")){
                 errorTxt.setVisibility(View.VISIBLE);
             }else{
-                DictionaryModel newDict = new DictionaryModel(initialDict.getWordId(), newWord);
+                DictionaryModel newDict = new DictionaryModel(newWord);
                 DictionaryModel oldDict = actionType == 1 ? null : initialDict;
                 dictionaryInputListener.sendRecord(actionType, newDict, oldDict);
                 getDialog().dismiss();
