@@ -61,4 +61,5 @@
     <string name="existed_word_error_dialog_title">Existed Word!</string>
     <string name="existed_word_error_dialog_message">The \'%s\' is existed. Please, try to add another word </string>
     <string name="ok">OK</string>
+    <string name="search_word_hint">Search word by keyword</string>
 </resources>
