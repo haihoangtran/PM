@@ -68,7 +68,6 @@ public class NoteDB extends DBBase {
     }
 
     public void updateNote(NoteModel newNote, int oldNoteID){
-        // status: 0 - incomplete, 1 - complete
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put("title", newNote.getTitle());
