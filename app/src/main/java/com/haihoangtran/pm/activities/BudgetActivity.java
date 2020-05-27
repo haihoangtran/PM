@@ -26,6 +26,7 @@ import com.baoyz.swipemenulistview.SwipeMenuItem;
 import com.baoyz.swipemenulistview.SwipeMenuListView;
 import com.haihoangtran.pm.R;
 import com.haihoangtran.pm.adapters.BudgetRecordsAdapter;
+import com.haihoangtran.pm.components.SwipeListViewBuilder;
 import com.haihoangtran.pm.dialogs.BudgetAddEditDialog;
 import com.haihoangtran.pm.dialogs.BudgetYearlyDeleteDialog;
 
@@ -216,40 +217,16 @@ public class BudgetActivity extends NavigationBaseActivity implements BudgetAddE
     Handle for swiping for displaying another button
      */
     private void recordsListViewHandle(){
-
+        SwipeListViewBuilder builder = new SwipeListViewBuilder();
         final ArrayList<BudgetModel> records = budgetDB.getMonthlyRecords(this.monthDropdown.getSelectedItem().toString(),
                                                               this.yearDropdown.getSelectedItem().toString(),
                                                               this.displayType);
-
-        // Create and Add DataApdater to list view
-        recordListView = findViewById(R.id.record_list_view);
         BudgetRecordsAdapter recordDataAdapter = new BudgetRecordsAdapter(this, 0, records);
-        recordListView.setAdapter(recordDataAdapter);
+        SwipeMenuListView recordListView = builder.build(records, recordDataAdapter,
+                                                         (SwipeMenuListView) findViewById(R.id.record_list_view),
+                                                         getApplicationContext(),
+                                                        18, 170);
 
-        SwipeMenuCreator creator = new SwipeMenuCreator() {
-            @Override
-            public void create(SwipeMenu menu) {
-                // Create Edit button
-                SwipeMenuItem editItem = new SwipeMenuItem(getApplicationContext());
-                editItem.setBackground(new ColorDrawable(Color.rgb(0x30, 0xB1, 0xF5)));
-                editItem.setWidth(170);
-                editItem.setTitle(R.string.edit);
-                editItem.setTitleSize(18);
-                editItem.setTitleColor(Color.WHITE);
-                menu.addMenuItem(editItem);
-
-                // create "delete" item
-                SwipeMenuItem deleteItem = new SwipeMenuItem(getApplicationContext());
-                deleteItem.setBackground(new ColorDrawable(Color.rgb(0xF9,0x3F, 0x25)));
-                deleteItem.setWidth(170);
-                deleteItem.setIcon(R.drawable.ic_delete);
-                menu.addMenuItem(deleteItem);
-            }
-
-        };
-
-        // Add menu item and handle action on menu items
-        recordListView.setMenuCreator(creator);
         recordListView.setOnMenuItemClickListener(new SwipeMenuListView.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(int position, SwipeMenu menu, int index) {

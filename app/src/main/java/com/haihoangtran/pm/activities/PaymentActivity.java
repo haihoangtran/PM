@@ -19,6 +19,7 @@ import com.baoyz.swipemenulistview.SwipeMenuListView;
 import com.haihoangtran.pm.R;
 import com.haihoangtran.pm.adapters.PaymentPaidAdapter;
 import com.haihoangtran.pm.adapters.PaymentRecordsAdapter;
+import com.haihoangtran.pm.components.SwipeListViewBuilder;
 import com.haihoangtran.pm.dialogs.PaymentDialog;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -137,37 +138,12 @@ public class PaymentActivity extends NavigationBaseActivity implements PaymentDi
     // Handle swiping to left for display another button
 
     private void recordsListViewHandle() {
+        SwipeListViewBuilder builder = new SwipeListViewBuilder();
         final ArrayList<PaymentModel> records = paymentDB.getAllPaymentRecords();
-
-        // Create and Add DataApdater to list view
-        recordListView = findViewById(R.id.payment_record_list_view);
         PaymentRecordsAdapter recordDataAdapter = new PaymentRecordsAdapter(this, 0, records);
-        recordListView.setAdapter(recordDataAdapter);
-
-        SwipeMenuCreator creator = new SwipeMenuCreator() {
-            @Override
-            public void create(SwipeMenu menu) {
-                // Create Edit button
-                SwipeMenuItem editItem = new SwipeMenuItem(getApplicationContext());
-                editItem.setBackground(new ColorDrawable(Color.rgb(0x30, 0xB1, 0xF5)));
-                editItem.setWidth(170);
-                editItem.setTitle(R.string.edit);
-                editItem.setTitleSize(18);
-                editItem.setTitleColor(Color.WHITE);
-                menu.addMenuItem(editItem);
-
-                // create "delete" item
-                SwipeMenuItem deleteItem = new SwipeMenuItem(getApplicationContext());
-                deleteItem.setBackground(new ColorDrawable(Color.rgb(0xF9, 0x3F, 0x25)));
-                deleteItem.setWidth(170);
-                deleteItem.setIcon(R.drawable.ic_delete);
-                menu.addMenuItem(deleteItem);
-            }
-
-        };
-
-        // Add menu item and handle action on menu items
-        recordListView.setMenuCreator(creator);
+        recordListView = builder.build(records, recordDataAdapter,
+                                       (SwipeMenuListView)findViewById(R.id.payment_record_list_view),
+                                        getApplicationContext(), 18, 170);
         recordListView.setOnMenuItemClickListener(new SwipeMenuListView.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(int position, SwipeMenu menu, int index) {

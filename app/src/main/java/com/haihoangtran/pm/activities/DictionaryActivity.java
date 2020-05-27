@@ -11,6 +11,7 @@ import com.baoyz.swipemenulistview.SwipeMenuItem;
 import com.baoyz.swipemenulistview.SwipeMenuListView;
 import com.haihoangtran.pm.R;
 import com.haihoangtran.pm.adapters.DictionaryWordRecordsAdapter;
+import com.haihoangtran.pm.components.SwipeListViewBuilder;
 import com.haihoangtran.pm.dialogs.DictionaryDialog;
 import com.haihoangtran.pm.dialogs.DictionaryExistedWordErrorDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -126,36 +127,12 @@ public class DictionaryActivity extends AppCompatActivity implements DictionaryD
 
     // --------------           LIST VIEW        --------------
     public void searchResultListViewHandle(){
+        SwipeListViewBuilder builder = new SwipeListViewBuilder();
         final ArrayList<DictionaryModel> wordRecords = searchValue.matches("") ? dictionaryDb.getAllWords(): dictionaryDb.getWordsByKeyWord(searchValue);
-
-        // Create and Add DataApdater to list view
-        SwipeMenuListView recordListView = findViewById(R.id.dictionary_result_search);
         DictionaryWordRecordsAdapter recordDataAdapter = new DictionaryWordRecordsAdapter(this, 0, wordRecords);
-        recordListView.setAdapter(recordDataAdapter);
-
-        SwipeMenuCreator creator = new SwipeMenuCreator() {
-            @Override
-            public void create(SwipeMenu menu) {
-                // Create Edit button
-                SwipeMenuItem editItem = new SwipeMenuItem(getApplicationContext());
-                editItem.setBackground(new ColorDrawable(Color.rgb(0x30, 0xB1, 0xF5)));
-                editItem.setWidth(180);
-                editItem.setTitle(R.string.edit);
-                editItem.setTitleSize(15);
-                editItem.setTitleColor(Color.WHITE);
-                menu.addMenuItem(editItem);
-
-                // create "delete" item
-                SwipeMenuItem deleteItem = new SwipeMenuItem(getApplicationContext());
-                deleteItem.setBackground(new ColorDrawable(Color.rgb(0xF9,0x3F, 0x25)));
-                deleteItem.setWidth(180);
-                deleteItem.setIcon(R.drawable.ic_delete);
-                menu.addMenuItem(deleteItem);
-            }
-        };
-
-        // Add menu item and handle action on menu items
-        recordListView.setMenuCreator(creator);
+        SwipeMenuListView recordListView = builder.build(wordRecords,recordDataAdapter,
+                                                        (SwipeMenuListView) findViewById(R.id.dictionary_result_search),
+                                                         getApplicationContext(), 15, 180);
         recordListView.setOnMenuItemClickListener(new SwipeMenuListView.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(int position, SwipeMenu menu, int index) {
