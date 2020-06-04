@@ -34,8 +34,11 @@ public class PaymentRecordsAdapter extends ArrayAdapter<PaymentModel> {
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         PaymentModel record = records.get(position);
 
-        LayoutInflater inflater = (LayoutInflater)context.getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
-        View view = inflater.inflate(R.layout.payment_record_cell, null);
+        View view = convertView;
+        if(view == null) {
+            LayoutInflater inflater = (LayoutInflater) context.getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
+            view = inflater.inflate(R.layout.payment_record_cell, null);
+        }
 
         // Define element in payment record cell
         TextView place = view.findViewById(R.id.pay_to_txt);

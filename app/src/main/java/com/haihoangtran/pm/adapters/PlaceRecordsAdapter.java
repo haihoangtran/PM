@@ -26,8 +26,11 @@ public class PlaceRecordsAdapter extends ArrayAdapter<PlaceModel> {
         // Get the data item for this position
         PlaceModel place = placeRecords.get(position);
 
-        LayoutInflater inflater = (LayoutInflater)context.getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
-        View view = inflater.inflate(R.layout.place_record_cell, null);
+        View view = convertView;
+        if (view == null) {
+            LayoutInflater inflater = (LayoutInflater) context.getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
+            view = inflater.inflate(R.layout.place_record_cell, null);
+        }
 
         // Lookup view for data population
         TextView name = view.findViewById(R.id.place_name_text);

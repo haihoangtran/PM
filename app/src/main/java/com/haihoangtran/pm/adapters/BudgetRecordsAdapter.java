@@ -29,9 +29,11 @@ public class BudgetRecordsAdapter extends ArrayAdapter<BudgetModel> {
     public View getView(int position, View convertView, ViewGroup parent) {
         // Get the data item for this position
         BudgetModel record = records.get(position);
-
-        LayoutInflater inflater = (LayoutInflater)context.getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
-        View view = inflater.inflate(R.layout.budget_record_cell, null);
+        View view = convertView;
+        if(view == null) {
+            LayoutInflater inflater = (LayoutInflater) context.getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
+            view = inflater.inflate(R.layout.budget_record_cell, null);
+        }
 
         // Lookup view for data population
         TextView placeTxt = view.findViewById(R.id.place_txt);

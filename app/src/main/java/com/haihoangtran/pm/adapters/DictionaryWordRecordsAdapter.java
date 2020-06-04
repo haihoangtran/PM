@@ -24,8 +24,12 @@ public class DictionaryWordRecordsAdapter extends ArrayAdapter<DictionaryModel> 
 
     public View getView(int position, View convertView, ViewGroup parent){
         DictionaryModel word = wordRecords.get(position);
-        LayoutInflater inflater = (LayoutInflater)context.getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
-        View view = inflater.inflate(R.layout.words_record_cell, null);
+
+        View view = convertView;
+        if (view == null) {
+            LayoutInflater inflater = (LayoutInflater) context.getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
+            view = inflater.inflate(R.layout.words_record_cell, null);
+        }
 
         TextView wordText = view.findViewById(R.id.word_text);
         wordText.setText(word.getWord());

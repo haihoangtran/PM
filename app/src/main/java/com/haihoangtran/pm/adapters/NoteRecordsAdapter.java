@@ -25,8 +25,12 @@ public class NoteRecordsAdapter extends ArrayAdapter<NoteModel> {
     public View getView(int position, View convertView, ViewGroup parent){
         // Get specific note by position
         NoteModel note = noteRecords.get(position);
-        LayoutInflater inflater = (LayoutInflater)context.getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
-        View view = inflater.inflate(R.layout.note_title_record_cell, null);
+
+        View view = convertView;
+        if (view == null) {
+            LayoutInflater inflater = (LayoutInflater) context.getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
+            view = inflater.inflate(R.layout.note_title_record_cell, null);
+        }
 
         TextView title = view.findViewById(R.id.note_title_text);
         title.setText(note.getTitle());
