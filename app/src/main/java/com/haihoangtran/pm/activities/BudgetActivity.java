@@ -6,12 +6,10 @@ import android.os.Bundle;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.DialogFragment;
-
 import android.view.KeyEvent;
 import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.ArrayAdapter;
-
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -21,19 +19,13 @@ import android.view.View;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayout.Tab;
 import com.baoyz.swipemenulistview.SwipeMenu;
-import com.baoyz.swipemenulistview.SwipeMenuCreator;
-import com.baoyz.swipemenulistview.SwipeMenuItem;
 import com.baoyz.swipemenulistview.SwipeMenuListView;
 import com.haihoangtran.pm.R;
 import com.haihoangtran.pm.adapters.BudgetRecordsAdapter;
 import com.haihoangtran.pm.components.SwipeListViewBuilder;
 import com.haihoangtran.pm.dialogs.BudgetAddEditDialog;
 import com.haihoangtran.pm.dialogs.BudgetYearlyDeleteDialog;
-
-import android.graphics.drawable.ColorDrawable;
-import android.graphics.Color;
 import android.widget.TextView;
-
 import java.util.ArrayList;
 import java.util.List;
 import model.BudgetModel;

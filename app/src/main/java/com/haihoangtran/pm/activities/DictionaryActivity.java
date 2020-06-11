@@ -1,13 +1,8 @@
 package com.haihoangtran.pm.activities;
 
-import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import com.baoyz.swipemenulistview.SwipeMenu;
-import com.baoyz.swipemenulistview.SwipeMenuCreator;
-import com.baoyz.swipemenulistview.SwipeMenuItem;
 import com.baoyz.swipemenulistview.SwipeMenuListView;
 import com.haihoangtran.pm.R;
 import com.haihoangtran.pm.adapters.DictionaryWordRecordsAdapter;
@@ -19,7 +14,6 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.DialogFragment;
 import android.view.KeyEvent;
 import android.view.View;
-import android.view.inputmethod.InputMethodManager;
 import android.webkit.WebView;
 import android.widget.AdapterView;
 import android.widget.Button;

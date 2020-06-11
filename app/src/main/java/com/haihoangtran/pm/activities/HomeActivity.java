@@ -19,7 +19,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.view.Gravity;
 import android.content.pm.PackageManager;
-
 import com.haihoangtran.pm.R;
 import com.haihoangtran.pm.dialogs.UserDialog;
 import com.jjoe64.graphview.GraphView;
