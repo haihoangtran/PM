@@ -21,5 +21,6 @@
         android:layout_height="wrap_content"
         android:layout_weight="3"
         android:background="@drawable/speaker_button"
+        android:focusable="false"
         android:minHeight="30dp" />
 </LinearLayout>

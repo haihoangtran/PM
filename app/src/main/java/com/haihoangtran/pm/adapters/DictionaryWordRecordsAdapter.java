@@ -88,6 +88,4 @@ public class DictionaryWordRecordsAdapter extends ArrayAdapter<DictionaryModel>{
              }
          });
      }
-
-
 }
