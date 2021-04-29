@@ -21,6 +21,7 @@ import android.view.Gravity;
 import android.content.pm.PackageManager;
 import com.haihoangtran.pm.R;
 import com.haihoangtran.pm.dialogs.UserDialog;
+import com.haihoangtran.pm.dialogs.UserListDialog;
 import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.series.DataPoint;
 import com.jjoe64.graphview.series.LineGraphSeries;
@@ -51,7 +52,6 @@ public class HomeActivity extends AppCompatActivity implements UserDialog.OnInpu
         Toolbar toolbar = findViewById(R.id.title);
         setSupportActionBar(toolbar);
 
-        // Ask for Storage Permission
         // Ask Storage Permission
         ActivityCompat.requestPermissions(HomeActivity.this, new String[] {Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
 
@@ -60,7 +60,7 @@ public class HomeActivity extends AppCompatActivity implements UserDialog.OnInpu
         buggetDB = BudgetDB.getInstance(HomeActivity.this);
         paymentDB = PaymentDB.getInstance(HomeActivity.this);
         fileController = new FileController(HomeActivity.this);
-        currentUser = new UserModel("", 0.0);
+        currentUser = new UserModel(-1, "", 0.0, false);
 
         // Initialize Payment status
         paymentDB.refreshPaymentMonthlyStatus();
@@ -118,8 +118,8 @@ public class HomeActivity extends AppCompatActivity implements UserDialog.OnInpu
     public boolean onOptionsItemSelected(MenuItem item) {
         super.onOptionsItemSelected(item);
         switch(item.getItemId()){
-            case R.id.home_menu_edit_btn:
-                this.addEditUserDialog(2, this.currentUser);
+            case R.id.home_menu_users_btn:
+                this.usersListDialog();
                 break;
             case R.id.home_menu_export_btn:
                 this.fileController.exportDBToLocalStorage();
@@ -151,29 +151,38 @@ public class HomeActivity extends AppCompatActivity implements UserDialog.OnInpu
     @Override
     public void sendUser(int actionType, UserModel user){
         if (actionType == 1){
-            userDB.addUser(user.getFullName(), user.getBalance());
+            userDB.addUser(user.getFullName(), user.getBalance(), true);
         }else{
             userDB.updateUser(this.currentUser, user);
         }
-        this.currentUser = user;
+        this.currentUser = userDB.getAllSelectedUsers().get(0);
         displayUserInfo();
     }
 
     private void userHandle(){
-        ArrayList<UserModel> users = userDB.getUser();
-        if (users.size() < 1){
-            addEditUserDialog(1, new UserModel("", 0.0));
+        ArrayList<UserModel> selectedUsers = userDB.getAllSelectedUsers();
+        if (selectedUsers.size() == 0){
+            addEditUserDialog(1, new UserModel(-1, "", 0.0, false));
+        }else if(selectedUsers.size() > 1){
+            usersListDialog();
         }else{
-            this.currentUser = users.get(0);
+            this.currentUser = selectedUsers.get(0);
         }
         this.displayUserInfo();
     }
 
     //Handle dialog of add or edit record
     public void addEditUserDialog(int actionType, UserModel user){
-        UserDialog userDialog = new UserDialog(actionType, user);
+        UserDialog userDialog = new UserDialog(actionType, user, true);
         userDialog.setStyle(DialogFragment.STYLE_NORMAL, R.style.Theme_AppCompat_Light_Dialog_MinWidth);
         userDialog.show(getSupportFragmentManager(), "UserDialog");
+    }
+
+    // Handle dialog of users list
+    public void usersListDialog(){
+        UserListDialog usersListDialog= new UserListDialog(userDB);
+        usersListDialog.setStyle(DialogFragment.STYLE_NORMAL, R.style.Theme_AppCompat_Light_Dialog_MinWidth);
+        usersListDialog.show(getSupportFragmentManager(), "UserListDialog");
     }
 
     // Display user information

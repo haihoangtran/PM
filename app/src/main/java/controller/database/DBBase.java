@@ -60,7 +60,8 @@ public class DBBase extends SQLiteOpenHelper {
         /*
         field: full name, balance
          */
-        String sql = "Create table if not exists User (full_name text, balance real, primary key(full_name))";
+        String sql = "Create table if not exists User (userID integer primary key AUTOINCREMENT," +
+                     "full_name text, balance real, selected integer)";
         db.execSQL(sql);
     }
 

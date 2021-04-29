@@ -24,13 +24,38 @@ public class UserDB extends DBBase {
         super(context);
     }
 
-    public void addUser(String fullName, Double balance){
+    public ArrayList<UserModel> getAllSelectedUsers(){
+        SQLiteDatabase db = this.getReadableDatabase();
+        ArrayList <UserModel> users = new ArrayList<>();
+        String sql = "select * from User where selected == 1";
+        Cursor cursor = db.rawQuery(sql, null);
+        try{
+            if(cursor.moveToFirst()){
+                do{
+                    users.add(new UserModel(cursor.getInt(0),
+                                            cursor.getString(1),
+                                            cursor.getDouble(2),
+                            cursor.getInt(3) == 1));
+                }while(cursor.moveToNext());
+            }
+        }catch(Exception e) {
+            e.printStackTrace();
+        }finally {
+            if(cursor != null && !cursor.isClosed()){
+                cursor.close();
+            }
+        }
+        return users;
+    }
+
+    public void addUser(String fullName, Double balance, boolean selected){
         SQLiteDatabase db = this.getWritableDatabase();
         db.beginTransaction();
         try{
             ContentValues values = new ContentValues();
             values.put("full_name", fullName);
             values.put("balance", balance);
+            values.put("selected", selected ? 1 : 0);
             db.insert("User", null, values);
             db.setTransactionSuccessful();
 
@@ -42,15 +67,18 @@ public class UserDB extends DBBase {
         }
     }
 
-    public ArrayList<UserModel> getUser(){
+    public ArrayList<UserModel> getAllUsers(){
         SQLiteDatabase db = this.getReadableDatabase();
-        String sql = "Select u.full_name, u.balance from User as u";
-        ArrayList<UserModel> user = new ArrayList<>();
+        String sql = "Select * from User";
+        ArrayList<UserModel> users = new ArrayList<>();
         Cursor cursor = db.rawQuery(sql, null);
         try{
             if(cursor.moveToFirst()){
                 do{
-                    user.add(new UserModel(cursor.getString(0), cursor.getDouble(1)));
+                    users.add(new UserModel(cursor.getInt(0),
+                            cursor.getString(1),
+                            cursor.getDouble(2),
+                            cursor.getInt(3) == 1));
                 }while(cursor.moveToNext());
             }
         }catch(Exception e) {
@@ -60,7 +88,7 @@ public class UserDB extends DBBase {
                 cursor.close();
             }
         }
-        return user;
+        return users;
     }
 
     public void updateUser(UserModel old_user, UserModel new_user){
@@ -68,22 +96,40 @@ public class UserDB extends DBBase {
         ContentValues values = new ContentValues();
         values.put("full_name", new_user.getFullName());
         values.put("balance", new_user.getBalance());
-        db.update("User", values, "full_name = '" + old_user.getFullName() + "'", null);
+        values.put("selected", new_user.getSelected() ? 1: 0);
+        db.update("User", values, "userID = " + old_user.getUserID() , null);
         db.close();
     }
 
     public void updateBalance(Double differentAmount){
-        UserModel user = this.getUser().get(0);
+        UserModel user = this.getAllUsers().get(0);
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put("balance", user.getBalance() + differentAmount);
-        db.update("User", values, "full_name = '" + user.getFullName() + "'", null);
+        db.update("User", values, "userID = '" + user.getUserID() + "'", null);
         db.close();
     }
 
-    /* ###################################################################
-                            PRIVATE  FUNCTIONS
-     ###################################################################*/
+    public void updateSelectedUser(int selected_userID){
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.beginTransaction();
+        try{
+            ContentValues values = new ContentValues();
+            // Updated selected status = 1 for selected User ID
+            values.put("selected", 1);
+            db.update("User", values, "userID = " + selected_userID, null);
 
+            // Updated selected status = 0 for not selected User ID
+            values.clear();
+            values.put("selected", 0);
+            db.update("User", values, "userID != " + selected_userID, null);
+            db.setTransactionSuccessful();
+        }catch (Exception e){
+            e.printStackTrace();
+        }finally {
+            db.endTransaction();
+            db.close();
+        }
+    }
 
 }

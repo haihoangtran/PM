@@ -1,5 +1,6 @@
 package com.haihoangtran.pm.dialogs;
 
+import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,6 +12,7 @@ import android.content.Context;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
+import androidx.fragment.app.Fragment;
 
 import com.haihoangtran.pm.R;
 
@@ -19,6 +21,7 @@ import model.UserModel;
 public class UserDialog extends DialogFragment {
     private UserModel user;
     private int actionType;
+    private boolean is_activity;
     private TextView title, errorTxt;
     private EditText name, balance;
     private Button cancelBtn, confirmBtn;
@@ -29,9 +32,10 @@ public class UserDialog extends DialogFragment {
 
     public OnInputListener userInputListener;
 
-    public UserDialog(int actionType, UserModel user){
+    public UserDialog(int actionType, UserModel user, boolean is_activity){
         this.actionType = actionType;
         this.user = user;
+        this.is_activity = is_activity;             // for onAttach know where data is sent back to
     }
 
     @Nullable
@@ -51,7 +55,7 @@ public class UserDialog extends DialogFragment {
         //Initialize some elements
         title.setText((this.actionType == 1 ? getString(R.string.add) : getString(R.string.edit)));
         name.setText(user.getFullName());
-        balance.setText((user.getBalance() == 0.0 ? "" : String.format("%.2f", user.getBalance())));
+        balance.setText((user.getBalance() == 0.0 ? "0.00" : String.format("%.2f", user.getBalance())));
         errorTxt.setVisibility(View.INVISIBLE);
 
         // Handle Cancel button
@@ -69,8 +73,7 @@ public class UserDialog extends DialogFragment {
 
     //Handle Cancel button
     private void cancelBtnHandle(){
-        cancelBtn.setVisibility((this.actionType == 1 ? View.INVISIBLE : View.VISIBLE));
-        cancelBtn.setClickable((this.actionType == 1 ? false : true));
+        cancelBtn.setClickable((this.actionType != 1));
         cancelBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -88,10 +91,10 @@ public class UserDialog extends DialogFragment {
             public void onClick(View v) {
                 String user_name = name.getText().toString();
                 String user_balance = balance.getText().toString();
-                if (user_name.matches("") || user_balance.matches("")){
+                if (user_name.matches("")){
                     errorTxt.setVisibility(View.VISIBLE);
                 }else {
-                    UserModel new_user = new UserModel(user_name, Double.parseDouble(user_balance));
+                    UserModel new_user = new UserModel(-1, user_name, Double.parseDouble(user_balance), false);
                     userInputListener.sendUser(actionType, new_user);
                     getDialog().dismiss();
                 }

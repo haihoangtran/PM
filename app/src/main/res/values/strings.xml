@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Personal Management</string>
     <string name="action_settings">Settings</string>
-    <string name="app_permission_denied">Permission is dennied to read your External Storage</string>
+    <string name="app_permission_denied">Permission is denied to read your External Storage</string>
     <string name="welcome_personal_management">Welcome to\n Personal Management</string>
     <string name="reminder_tab">Reminder</string>
     <string name="budget_button">Budget</string>
@@ -42,9 +42,10 @@
     <string name="to_lable">To:</string>
     <string name="total_amount_label">Total($):</string>
     <string name="default_amount_label">Default($):</string>
-    <string name="export">Export</string>
-    <string name="import_text">Import</string>
-    <string name="share_text">Share</string>
+    <string name="home_menu_users">Users</string>
+    <string name="home_menu_export">Export</string>
+    <string name="home_menu_import">Import</string>
+    <string name="home_menu_share">Share</string>
     <string name="share_using_title">Share using: </string>
     <string name="title_activity_place">Place</string>
     <string name="place_name">Name:</string>
@@ -62,4 +63,5 @@
     <string name="existed_word_error_dialog_message">The \'%s\' is existed. Please, try to add another word </string>
     <string name="ok">OK</string>
     <string name="search_word_hint">Search word by keyword</string>
+    <string name="users_list_dialog_title_text">Users List</string>
 </resources>
