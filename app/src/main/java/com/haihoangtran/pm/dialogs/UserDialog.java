@@ -94,7 +94,7 @@ public class UserDialog extends DialogFragment {
                 if (user_name.matches("")){
                     errorTxt.setVisibility(View.VISIBLE);
                 }else {
-                    UserModel new_user = new UserModel(-1, user_name, Double.parseDouble(user_balance), false);
+                    UserModel new_user = new UserModel(-1, user_name, Double.parseDouble(user_balance), (actionType == 1 ? false : user.getSelected()));
                     userInputListener.sendUser(actionType, new_user);
                     getDialog().dismiss();
                 }

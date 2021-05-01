@@ -17,4 +17,5 @@
     <color name="confirmButtonColor">#303F9F</color>
     <color name="paymentSubTitleColor">#9DF539</color>
     <color name="noteSubTitleColor">#9DF539</color>
+    <color name="homeButtonColor">#838383</color>
 </resources>

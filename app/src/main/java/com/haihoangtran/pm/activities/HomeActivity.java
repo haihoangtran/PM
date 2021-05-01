@@ -136,6 +136,11 @@ public class HomeActivity extends AppCompatActivity implements UserDialog.OnInpu
             case R.id.home_menu_share_btn:
                 this.shareBtnHandle();
                 break;
+            case R.id.user_edit_btn:
+                this.addEditUserDialog(2, this.currentUser);
+                break;
+            case R.id.user_delete_btn:
+                break;
         }
         return true;
     }
