@@ -132,4 +132,10 @@ public class UserDB extends DBBase {
         }
     }
 
+    public void deleteSelectedUser(int selected_userID){
+        SQLiteDatabase db = this.getWritableDatabase();
+        int rows = db.delete("User", "userID = " + selected_userID, null);
+        db.close();
+    }
+
 }

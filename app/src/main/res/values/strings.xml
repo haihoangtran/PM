@@ -9,7 +9,7 @@
     <string name="place_button">Place</string>
     <string name="note_button">Note</string>
     <string name="dictionary_button">Dictionary</string>
-    <string name="title_activity_budget">Budget Management</string>
+    <string name="title_activity_budget">Budget</string>
     <string name="all_budget_tab">All</string>
     <string name="deposit">Deposit</string>
     <string name="withdraw">Withdraw</string>
@@ -64,4 +64,8 @@
     <string name="ok">OK</string>
     <string name="search_word_hint">Search word by keyword</string>
     <string name="users_list_dialog_title_text">Users List</string>
+    <string name="are_user_sure_title">Are your sure?</string>
+    <string name="delete_alert_message">Do you want to delete?</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
 </resources>

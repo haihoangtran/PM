@@ -1,7 +1,12 @@
 package com.haihoangtran.pm.activities;
 
+import android.content.DialogInterface;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
+
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
@@ -140,6 +145,7 @@ public class HomeActivity extends AppCompatActivity implements UserDialog.OnInpu
                 this.addEditUserDialog(2, this.currentUser);
                 break;
             case R.id.user_delete_btn:
+                this.deleteUserBtnHandle();
                 break;
         }
         return true;
@@ -166,9 +172,10 @@ public class HomeActivity extends AppCompatActivity implements UserDialog.OnInpu
 
     private void userHandle(){
         ArrayList<UserModel> selectedUsers = userDB.getAllSelectedUsers();
-        if (selectedUsers.size() == 0){
+        ArrayList<UserModel> allUsers = userDB.getAllUsers();
+        if (selectedUsers.size() == 0 && allUsers.size() == 0){
             addEditUserDialog(1, new UserModel(-1, "", 0.0, false));
-        }else if(selectedUsers.size() > 1){
+        }else if(selectedUsers.size() > 1 || (selectedUsers.size() == 0 && allUsers.size() > 0)){
             usersListDialog();
         }else{
             this.currentUser = selectedUsers.get(0);
@@ -340,5 +347,29 @@ public class HomeActivity extends AppCompatActivity implements UserDialog.OnInpu
         startActivity(Intent.createChooser(shareIntent, getString(R.string.share_using_title)));
     }
 
+    private void deleteUserBtnHandle(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle(R.string.are_user_sure_title);
+        builder.setMessage(R.string.delete_alert_message);
+        builder.setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+        builder.setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+                userDB.deleteSelectedUser(currentUser.getUserID());
+                currentUser = new UserModel(-1, "", 0.0, false);
+                displayUserInfo();
+                userHandle();
+            }
+        });
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
+        getWindow().setBackgroundDrawable(new ColorDrawable(ContextCompat.getColor(this, R.color.colorAccent)));
+    }
 
 }

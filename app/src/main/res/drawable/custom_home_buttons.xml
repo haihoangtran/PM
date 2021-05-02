@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <shape xmlns:android="http://schemas.android.com/apk/res/android">
-    <solid android:color="@color/homeButtonColor" />
+    <gradient
+        android:type="radial"
+        android:gradientRadius="150%p"
+        android:startColor="@color/colorAccent"
+        android:endColor="@color/homeButtonColor"  />
     <corners android:radius="8dp" />
     <stroke
         android:width="3dp"
